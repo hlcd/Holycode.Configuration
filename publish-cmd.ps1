@@ -2,7 +2,9 @@ param(
     [Parameter()]
     [ValidateSet("local","choco","octo")]
     $type="local",
-    $publishdir = $null
+    $publishdir = $null,
+    [switch][bool] $build,
+    [switch][bool] $newBuildNo = $true
 )
 
 ipmo require
@@ -10,10 +12,13 @@ req process
 req pathutils
 req nupkg
 
+if ($newBuildNo) {
+    update-buildversion "$psscriptroot\src\Holycode.Configuration"
+}
 
-update-buildversion "$psscriptroot\src\Holycode.Configuration"
-
-& "$psscriptroot\build-cmd.ps1"
+if ($build) {
+    & "$psscriptroot\build-cmd.ps1"
+}
 #if (!(test-path $publishdir)) { $null = mkdir $publishdir }
 #cp "$psscriptroot\.build\hcfg" $publishdir -Recurse -Force
 
