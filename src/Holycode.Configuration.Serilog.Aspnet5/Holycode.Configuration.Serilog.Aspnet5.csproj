@@ -4,7 +4,7 @@
     <VersionPrefix>3.0.2</VersionPrefix>
     <VersionSuffix>v3-003-fa3da</VersionSuffix>
     <Company>Holycode</Company>
-    <TargetFramework>net451</TargetFramework>
+    <TargetFrameworks>net461</TargetFrameworks>
     <DebugType>portable</DebugType>
     <AssemblyName>Holycode.Configuration.Serilog.Aspnet5</AssemblyName>
     <OutputType>Library</OutputType>
@@ -22,5 +22,8 @@
     <Reference Include="System.Web" />
     <Reference Include="System" />
     <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.Web" />
   </ItemGroup>
 </Project>

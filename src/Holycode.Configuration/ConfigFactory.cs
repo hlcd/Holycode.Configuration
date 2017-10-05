@@ -32,10 +32,10 @@ namespace Microsoft.Extensions.Configuration
                 // {
                 //     applicationBasePath = Path.GetFullPath(".");
                 // }
-                applicationBasePath = Microsoft.Extensions.PlatformAbstractions.PlatformServices.Default.Application.ApplicationBasePath;
+                applicationBasePath = AppDomain.CurrentDomain.BaseDirectory;
 
 #else
-                applicationBasePath = Microsoft.Extensions.PlatformAbstractions.PlatformServices.Default.Application.ApplicationBasePath;
+                applicationBasePath = AppDomain.CurrentDomain.BaseDirectory;
 #endif
             }
 

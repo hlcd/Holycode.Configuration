@@ -5,7 +5,7 @@
     <VersionSuffix>v3-004-fa3da</VersionSuffix>
     <Company>MyCompany</Company>
     <Authors>Holycode</Authors>
-    <TargetFrameworks>netstandard1.6;net451</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
     <AssemblyName>Holycode.Configuration.log4net</AssemblyName>
     <PackageId>Holycode.Configuration.log4net</PackageId>
   </PropertyGroup>
