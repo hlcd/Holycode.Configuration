@@ -1,29 +1,26 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <Description>no description</Description>
-    <VersionPrefix>3.0.0</VersionPrefix>
+    <VersionPrefix>3.0.2</VersionPrefix>
+    <VersionSuffix>v3-003-fa3da</VersionSuffix>
+    <Company>Holycode</Company>
     <TargetFramework>net451</TargetFramework>
     <DebugType>portable</DebugType>
     <AssemblyName>Holycode.Configuration.Serilog.Aspnet5</AssemblyName>
     <OutputType>Library</OutputType>
     <PackageId>Holycode.Configuration.Serilog.Aspnet5</PackageId>
   </PropertyGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\Holycode.Configuration\Holycode.Configuration.csproj" />
     <ProjectReference Include="..\Holycode.Configuration.Serilog\Holycode.Configuration.Serilog.csproj" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="SerilogWeb.Classic" Version="2.0.10" />
     <PackageReference Include="log4net.Appender.Serilog" Version="1.0.5-master008-6b3d7" />
   </ItemGroup>
-
   <ItemGroup Condition=" '$(TargetFramework)' == 'net451' ">
     <Reference Include="System.Web" />
     <Reference Include="System" />
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
-
 </Project>
