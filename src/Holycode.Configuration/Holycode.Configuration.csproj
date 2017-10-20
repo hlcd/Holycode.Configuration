@@ -1,8 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <VersionPrefix>3.0.2</VersionPrefix>
-    <VersionSuffix>
-    </VersionSuffix>
+    <VersionPrefix>3.0.3</VersionPrefix>
+    <VersionSuffix>master000-5b427</VersionSuffix>
     <Authors>Holycode</Authors>
     <Description>Tools for managing configuration</Description>
     <AssemblyName>Holycode.Configuration</AssemblyName>

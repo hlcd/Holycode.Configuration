@@ -362,6 +362,14 @@ namespace Microsoft.Extensions.Configuration
                     cfgTrace.Append($"{providerPath} {filesrc.Path}");
                     if (filesrc.Optional) cfgTrace.Append(" (optional)");
                 }
+                else if (src is MemoryConfigurationSource)
+                {
+                    var memsrc = src as MemoryConfigurationSource;
+                    var topKeys = memsrc.InitialData.Take(4).Select(kvp => kvp.Key).ToList();
+                    if (memsrc.InitialData.Count() > topKeys.Count) topKeys.Add("...");
+                    var sa.nemple = "[" + string.Join(",", topKeys) + "]";
+                    cfgTrace.Append($"{src.GetType().Name} {sample}");
+                }
                 else
                 {
                     cfgTrace.Append($"{src.GetType().Name}");

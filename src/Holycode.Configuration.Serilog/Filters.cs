@@ -46,13 +46,13 @@ namespace Holycode.Configuration.Serilog.Filters
         {
             if (Ip != null)
             {
-                LogEventPropertyValue ctx;
-                if (ev.Properties.TryGetValue("ClientIp", out ctx))
+                LogEventPropertyValue ctx = null;
+                if (ev?.Properties?.TryGetValue("ClientIp", out ctx) ?? false)
                 {
-                    if (((ScalarValue)ctx).Value.ToString() == Ip) return true;
+                    if (((ScalarValue)ctx)?.Value?.ToString() == Ip) return true;
                 }
             }
-            return ev.Level >= logLevel.MinimumLevel;
+            return ev != null && ev.Level >= logLevel.MinimumLevel;
         }
     }
 }

@@ -20,7 +20,8 @@
   <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
     <DefineConstants>$(DefineConstants);CORECLR</DefineConstants>
     <Company>MyCompany</Company>
-    <VersionSuffix>master002-264ce</VersionSuffix>
+    <VersionSuffix>
+    </VersionSuffix>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="log4net" Version="2.0.8" />
