@@ -367,7 +367,7 @@ namespace Microsoft.Extensions.Configuration
                     var memsrc = src as MemoryConfigurationSource;
                     var topKeys = memsrc.InitialData.Take(4).Select(kvp => kvp.Key).ToList();
                     if (memsrc.InitialData.Count() > topKeys.Count) topKeys.Add("...");
-                    var sa.nemple = "[" + string.Join(",", topKeys) + "]";
+                    var sample = "[" + string.Join(",", topKeys) + "]";
                     cfgTrace.Append($"{src.GetType().Name} {sample}");
                 }
                 else

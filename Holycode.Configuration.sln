@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.0
+VisualStudioVersion = 15.0.27019.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{0420695C-3739-4B38-B52E-3E4F26AE191B}"
 EndProject
@@ -21,6 +21,10 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Holycode.Configuration.Serilog", "src\Holycode.Configuration.Serilog\Holycode.Configuration.Serilog.csproj", "{DD8F6377-705F-4941-B8E9-9683D0733C27}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Holycode.Configuration.Serilog.Aspnet5", "src\Holycode.Configuration.Serilog.Aspnet5\Holycode.Configuration.Serilog.Aspnet5.csproj", "{C2ED504C-8F22-49A8-9010-E4F2A33097DB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Holycode.Configuration.CLI", "src\Holycode.Configuration.CLI\Holycode.Configuration.CLI.csproj", "{CC8BBFAB-DAD1-4B49-B245-5EB84411EBED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Holycode.Configuration.Generator", "src\Holycode.Configuration.Generator\Holycode.Configuration.Generator.csproj", "{479CA14F-EEA2-4520-8D06-A04B2DE13600}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -128,6 +132,30 @@ Global
 		{C2ED504C-8F22-49A8-9010-E4F2A33097DB}.Release|x64.Build.0 = Release|Any CPU
 		{C2ED504C-8F22-49A8-9010-E4F2A33097DB}.Release|x86.ActiveCfg = Release|Any CPU
 		{C2ED504C-8F22-49A8-9010-E4F2A33097DB}.Release|x86.Build.0 = Release|Any CPU
+		{CC8BBFAB-DAD1-4B49-B245-5EB84411EBED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC8BBFAB-DAD1-4B49-B245-5EB84411EBED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC8BBFAB-DAD1-4B49-B245-5EB84411EBED}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{CC8BBFAB-DAD1-4B49-B245-5EB84411EBED}.Debug|x64.Build.0 = Debug|Any CPU
+		{CC8BBFAB-DAD1-4B49-B245-5EB84411EBED}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{CC8BBFAB-DAD1-4B49-B245-5EB84411EBED}.Debug|x86.Build.0 = Debug|Any CPU
+		{CC8BBFAB-DAD1-4B49-B245-5EB84411EBED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC8BBFAB-DAD1-4B49-B245-5EB84411EBED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC8BBFAB-DAD1-4B49-B245-5EB84411EBED}.Release|x64.ActiveCfg = Release|Any CPU
+		{CC8BBFAB-DAD1-4B49-B245-5EB84411EBED}.Release|x64.Build.0 = Release|Any CPU
+		{CC8BBFAB-DAD1-4B49-B245-5EB84411EBED}.Release|x86.ActiveCfg = Release|Any CPU
+		{CC8BBFAB-DAD1-4B49-B245-5EB84411EBED}.Release|x86.Build.0 = Release|Any CPU
+		{479CA14F-EEA2-4520-8D06-A04B2DE13600}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{479CA14F-EEA2-4520-8D06-A04B2DE13600}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{479CA14F-EEA2-4520-8D06-A04B2DE13600}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{479CA14F-EEA2-4520-8D06-A04B2DE13600}.Debug|x64.Build.0 = Debug|Any CPU
+		{479CA14F-EEA2-4520-8D06-A04B2DE13600}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{479CA14F-EEA2-4520-8D06-A04B2DE13600}.Debug|x86.Build.0 = Debug|Any CPU
+		{479CA14F-EEA2-4520-8D06-A04B2DE13600}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{479CA14F-EEA2-4520-8D06-A04B2DE13600}.Release|Any CPU.Build.0 = Release|Any CPU
+		{479CA14F-EEA2-4520-8D06-A04B2DE13600}.Release|x64.ActiveCfg = Release|Any CPU
+		{479CA14F-EEA2-4520-8D06-A04B2DE13600}.Release|x64.Build.0 = Release|Any CPU
+		{479CA14F-EEA2-4520-8D06-A04B2DE13600}.Release|x86.ActiveCfg = Release|Any CPU
+		{479CA14F-EEA2-4520-8D06-A04B2DE13600}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -141,6 +169,8 @@ Global
 		{2EA43AC3-6625-4E5B-81F7-DEE6D9C56CB3} = {CD0955D5-CCB3-4E96-B9F7-834FA6A4EC16}
 		{DD8F6377-705F-4941-B8E9-9683D0733C27} = {CD0955D5-CCB3-4E96-B9F7-834FA6A4EC16}
 		{C2ED504C-8F22-49A8-9010-E4F2A33097DB} = {CD0955D5-CCB3-4E96-B9F7-834FA6A4EC16}
+		{CC8BBFAB-DAD1-4B49-B245-5EB84411EBED} = {CD0955D5-CCB3-4E96-B9F7-834FA6A4EC16}
+		{479CA14F-EEA2-4520-8D06-A04B2DE13600} = {CD0955D5-CCB3-4E96-B9F7-834FA6A4EC16}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {66FE1631-F972-47D2-8907-B045280D62C8}

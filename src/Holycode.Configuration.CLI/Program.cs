@@ -12,7 +12,7 @@ using Microsoft.Extensions.Configuration.EnvironmentVariables;
 using Microsoft.Extensions.Configuration.Json;
 using Microsoft.Extensions.Configuration.Xml;
 
-namespace Holycode.Configuration.Commands
+namespace Holycode.Configuration.CLI
 {
     public class Program
     {
@@ -480,12 +480,11 @@ namespace Holycode.Configuration.Commands
                 foreach (var k in dict.Keys)
                 {
                     var key = k;
-                    string v = null;
                     if (conf is IConfigurationSection)
                     {
                         key = (conf as IConfigurationSection).Path + ":" + key;
                     }
-                    if (srcCfg.TryGet(key, out v))
+                    if (srcCfg.TryGet(key, out string v))
                     {
                         count++;
                         if (!result.ContainsKey(key))

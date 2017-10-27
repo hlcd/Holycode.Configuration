@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <VersionPrefix>3.0.3</VersionPrefix>
+    <VersionSuffix>master000-5b427</VersionSuffix>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <AssemblyName>hcfg</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Holycode.Configuration\Holycode.Configuration.csproj" />
+  </ItemGroup>
+
+</Project>

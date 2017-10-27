@@ -64,14 +64,5 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard1.6' ">
     <DefineConstants>$(DefineConstants);CORECLR</DefineConstants>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)' == 'cmd' ">
-    <AssemblyName>hcfg</AssemblyName>
-    <OutputType>Exe</OutputType>
-  </PropertyGroup>
-  <ItemGroup Condition=" '$(Configuration)' == 'cmd' ">
-    <None Update="scripts\**">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
+  </PropertyGroup>  
 </Project>
