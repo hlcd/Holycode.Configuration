@@ -14,11 +14,11 @@ namespace Holycode.Configuration.Tests
             var cb = asm.CodeBase.Replace("file:///", "");
             cb = Path.GetDirectoryName(cb);
 
-            var i = cb.LastIndexOf("\\bin\\");
-            if (i > 0)
-            {
-                cb = cb.Substring(0, i);
-            }
+            //var i = cb.LastIndexOf("\\bin\\");
+            //if (i > 0)
+            //{
+            //    cb = cb.Substring(0, i);
+            //}
             return Path.Combine(cb, v);
         }
 
