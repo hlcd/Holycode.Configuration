@@ -2,37 +2,18 @@
   <PropertyGroup>
     <Description>no description</Description>
     <VersionPrefix>3.0.2</VersionPrefix>
-    <VersionSuffix>
-    </VersionSuffix>
+    <VersionSuffix>master</VersionSuffix>
     <Company>MyCompany</Company>
     <Authors>Holycode</Authors>
     <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
     <AssemblyName>Holycode.Configuration.log4net</AssemblyName>
     <PackageId>Holycode.Configuration.log4net</PackageId>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'netcoreapp1.1' ">
-    <DefineConstants>$(DefineConstants);CORECLR</DefineConstants>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard1.6' ">
-    <DefineConstants>$(DefineConstants);CORECLR</DefineConstants>
-  </PropertyGroup>
+  </PropertyGroup> 
   <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
     <DefineConstants>$(DefineConstants);CORECLR</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Remove="wwwroot;node_modules\**\*;bower_components;log" />
-    <EmbeddedResource Remove="wwwroot;node_modules\**\*;bower_components;log" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Holycode.Configuration\Holycode.Configuration.csproj" />
     <ProjectReference Include="..\Holycode.Utils.log4net\Holycode.Utils.log4net.csproj" />
-  </ItemGroup>
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net451' ">
-    <Reference Include="System" />
-    <Reference Include="Microsoft.CSharp" />
-  </ItemGroup>
-  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.6' ">
-    <PackageReference Include="System.Reflection" Version="4.3.0" />
-    <PackageReference Include="System.Runtime.Extensions" Version="4.3.0" />
   </ItemGroup>
 </Project>

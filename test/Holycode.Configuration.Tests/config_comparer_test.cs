@@ -1,14 +1,15 @@
 ﻿using Holycode.Configuration.Generator;
 using Microsoft.Extensions.Configuration;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Should;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using Xunit;
+using static Holycode.Configuration.Tests.TestHelpers;
 
-namespace Holycode.Configuration.Tests.dotnet
+namespace Holycode.Configuration.Tests
 {
     /*
       
@@ -21,11 +22,12 @@ namespace Holycode.Configuration.Tests.dotnet
         # 'explode' config values from variables
     */
 
+    [TestClass]
     public class config_comparer_test
     {
 
 
-        [Fact]
+        [TestMethod]
         public void compare_config_different_values()
         {
             var cfg1 = Helpers.LoadXMLConfigString(@"<appSettings><add key=""key1"" value=""val1""/></appSettings>");
@@ -42,7 +44,7 @@ namespace Holycode.Configuration.Tests.dotnet
             d.RightValue.ShouldEqual("val2");
         }
 
-        [Fact]
+        [TestMethod]
         public void compare_config_missing_value()
         {
             var cfg1 = Helpers.LoadXMLConfigString(@"<appSettings><add key=""key1"" value=""val1""/></appSettings>");
@@ -59,7 +61,7 @@ namespace Holycode.Configuration.Tests.dotnet
             d.RightValue.ShouldBeNull();
         }
 
-        [Fact]
+        [TestMethod]
         public void compare_config_missing_subkey()
         {
             var cfg1 = Helpers.LoadXMLConfigString(@"<appSettings><add key=""key1.subkey"" value=""val1""/></appSettings>");
@@ -76,11 +78,11 @@ namespace Holycode.Configuration.Tests.dotnet
             d.RightValue.ShouldBeNull();
         }
 
-        [Fact]
+        [TestMethod]
         public void compare_config_files()
         {
-            var p1 = Path.GetFullPath(@"input\compare\dev-1.config");
-            var p2 = Path.GetFullPath(@"input\compare\dev-2.config");
+            var p1 = GetPath(@"input\compare\dev-1.config");
+            var p2 = GetPath(@"input\compare\dev-2.config");
 
             var cfg1 = new ConfigurationBuilder().AddXmlAppSettings(p1).Build();
             var cfg2 = new ConfigurationBuilder().AddXmlAppSettings(p2).Build();

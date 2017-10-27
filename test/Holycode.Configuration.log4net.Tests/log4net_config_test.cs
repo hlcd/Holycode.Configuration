@@ -1,15 +1,17 @@
 ﻿using log4net;
 using System;
-using Xunit;
+
 using Should;
 using System.Reflection;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Tests
 {
+    [TestClass]
     public class log4net_config_test
     {
         Assembly rootAsm = typeof(log4net_config_test).GetTypeInfo().Assembly;
-        [Fact]
+        [TestMethod]
         public void should_add_global_appender()
         {
             LogManager.ResetConfiguration(rootAsm);
@@ -27,7 +29,7 @@ namespace Tests
             callbackExecuted.ShouldBeTrue();
         }
 
-        [Fact]
+        [TestMethod]
         public void should_add_appender_to_logger()
         {
             LogManager.ResetConfiguration(rootAsm);
@@ -46,7 +48,7 @@ namespace Tests
             callbackExecuted.ShouldBeTrue();
         }
 
-        [Fact]
+        [TestMethod]
         public void should_add_appender_to_logger_level_only()
         {
             LogManager.ResetConfiguration(rootAsm);
@@ -67,7 +69,7 @@ namespace Tests
             callbackCount.ShouldEqual(1);
         }
 
-        [Fact]
+        [TestMethod]
         public void root_appender_should_propagate()
         {
             LogManager.ResetConfiguration(rootAsm);

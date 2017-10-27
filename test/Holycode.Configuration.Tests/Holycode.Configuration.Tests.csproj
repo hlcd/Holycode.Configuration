@@ -7,9 +7,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="log4net.Appender.Serilog">
+      <Version>1.0.5-master008-6b3d7</Version>
+    </PackageReference>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.5.0-preview-20170810-02" />
     <PackageReference Include="MSTest.TestAdapter" Version="1.1.18" />
     <PackageReference Include="MSTest.TestFramework" Version="1.1.18" />
+    <PackageReference Include="Should" Version="1.1.20" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Holycode.Configuration.CLI\Holycode.Configuration.CLI.csproj" />
+    <ProjectReference Include="..\..\src\Holycode.Configuration.Generator\Holycode.Configuration.Generator.csproj" />
+    <ProjectReference Include="..\..\src\Holycode.Configuration.Serilog\Holycode.Configuration.Serilog.csproj" />
+    <ProjectReference Include="..\..\src\Holycode.Configuration\Holycode.Configuration.csproj" />
+    <ProjectReference Include="..\..\src\Holycode.Utils.log4net\Holycode.Utils.log4net.csproj" />
   </ItemGroup>
 
 </Project>

@@ -4,15 +4,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Xunit;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using log4net;
 using log4net.Config;
 
-namespace common.configuration.tests
+namespace Holycode.Configuration.Tests
 {
+    [TestClass]
     public class serilog_test
     {
-        [Fact]
+        [TestMethod]
         public void manual_sinks_graylog()
         {
             var url = "net.udp://localhost:12201";
@@ -22,19 +23,19 @@ namespace common.configuration.tests
             // default docker config
             builder.UseGraylog(url);
 
-            Serilog.Log.Logger = builder.CreateLogger();
+            global::Serilog.Log.Logger = builder.CreateLogger();
 
-            Serilog.Log.Information($"testing graylog from .NET using url {url} at {DateTime.Now}");
+            global::Serilog.Log.Information($"testing graylog from .NET using url {url} at {DateTime.Now}");
             var ms = new Random().Next() % 1000;
-            Serilog.Log.Information("generated time: {@time}", new { time = ms });
+            global::Serilog.Log.Information("generated time: {@time}", new { time = ms });
 
-            Serilog.Log.CloseAndFlush();
+            global::Serilog.Log.CloseAndFlush();
 
             Console.WriteLine($"graylog message sent to {url}");
             // aaand... check graylog!
         }
 
-        [Fact]
+        [TestMethod]
         public void log4net_with_seriog_file_sink()
         {
             var log = LogManager.GetLogger(typeof(serilog_test));
@@ -44,7 +45,7 @@ namespace common.configuration.tests
             var configuration = new ConfigurationBuilder().Build();
             var builder = new SerilogConfiguration(configuration, "test", ".");
             builder.UseFileSink();
-            Serilog.Log.Logger = builder.CreateLogger();
+            global::Serilog.Log.Logger = builder.CreateLogger();
 
             log4net.Appender.Serilog.Configuration.Configure(repo);
 
@@ -57,7 +58,7 @@ namespace common.configuration.tests
                 log.Error("caugth exception", ex);
             }
 
-            Serilog.Log.CloseAndFlush();
+            global::Serilog.Log.CloseAndFlush();
         }
 
 

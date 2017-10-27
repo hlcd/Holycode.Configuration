@@ -119,6 +119,10 @@ namespace Holycode.Configuration.Generator
         
         public static IConfiguration LoadXMLConfigString(string text)
         {
+            if (!text.StartsWith("<appSettings"))
+            {
+                text = "<appSettings>" + text + "</appSettings>";
+            }
             var tmp = Path.GetTempFileName();
             File.WriteAllText(tmp, text);
             var cfg = new ConfigurationBuilder().AddXmlAppSettings(tmp).Build();

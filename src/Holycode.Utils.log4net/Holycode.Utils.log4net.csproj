@@ -2,34 +2,18 @@
   <PropertyGroup>
     <Description>Holycode.Utils.log4net Class Library</Description>
     <VersionPrefix>2.2.5</VersionPrefix>
+    <VersionSuffix>master</VersionSuffix>
     <Authors>jakub.pawlowski</Authors>
     <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
     <AssemblyName>Holycode.Utils.log4net</AssemblyName>
     <PackageId>Holycode.Utils.log4net</PackageId>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'net451' ">
-    <DefineConstants>$(DefineConstants);NETFX</DefineConstants>
-    <DebugType>full</DebugType>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'netcoreapp1.1' ">
-    <DefineConstants>$(DefineConstants);CORECLR</DefineConstants>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard1.6' ">
-    <DefineConstants>$(DefineConstants);CORECLR</DefineConstants>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
-    <DefineConstants>$(DefineConstants);CORECLR</DefineConstants>
     <Company>MyCompany</Company>
-    <VersionSuffix>
-    </VersionSuffix>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
+    <DefineConstants>$(DefineConstants);CORECLR</DefineConstants>    
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="log4net" Version="2.0.8" />
-  </ItemGroup>
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net451' ">
-    <Reference Include="System" />
-    <Reference Include="Microsoft.CSharp" />
-  </ItemGroup>
-  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.6' ">
   </ItemGroup>
 </Project>

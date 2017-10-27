@@ -1,4 +1,4 @@
 ﻿
 using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo("Holycode.Configuration.Tests.dotnet")]
+[assembly: InternalsVisibleTo("Holycode.Configuration.Tests")]

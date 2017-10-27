@@ -9,8 +9,6 @@
     <PackageReleaseNotes>v2.1.2 - add dnxcore50 support</PackageReleaseNotes>
     <RuntimeFrameworkVersion>1.0.5</RuntimeFrameworkVersion>
     <Company>Holycode</Company>
-  </PropertyGroup>
-  <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
     <DebugType>portable</DebugType>
   </PropertyGroup>
@@ -18,15 +16,7 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="2.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="2.0.0" />
-    <!--<PackageReference Include="Microsoft.Extensions.PlatformAbstractions" Version="1.1.0" />-->
     <PackageReference Include="Microsoft.Extensions.Configuration.Xml" Version="2.0.0" />
-  </ItemGroup>
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net451' ">
-    <PackageReference Include="Microsoft.Owin" Version="3.0.1" />
-    <Reference Include="System.Configuration" />
-    <Reference Include="System.Xml" />
-    <Reference Include="System" />
-    <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup Condition=" '$(TargetFramework)' == 'net461' ">
     <PackageReference Include="Microsoft.Owin" Version="3.0.1" />
@@ -35,34 +25,11 @@
     <Reference Include="System" />
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
-  <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard1.6' ">
-    <PackageReference Include="System.Text.RegularExpressions" Version="4.3.0" />
-    <PackageReference Include="System.Console" Version="4.3.0" />
-    <PackageReference Include="System.Reflection" Version="4.3.0" />
-    <PackageReference Include="System.Runtime.Extensions" Version="4.3.0" />
-    <PackageReference Include="System.Runtime.Serialization.Primitives" Version="4.3.0" />
-    <PackageReference Include="System.Diagnostics.FileVersionInfo" Version="4.3.0" />
-  </ItemGroup>
-  <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp1.1' ">
-    <PackageReference Include="System.Text.RegularExpressions" Version="4.3.0" />
-    <PackageReference Include="System.Console" Version="4.3.0" />
-    <PackageReference Include="System.Reflection" Version="4.3.0" />
-    <PackageReference Include="System.Runtime.Extensions" Version="4.3.0" />
-    <PackageReference Include="System.Runtime.Serialization.Primitives" Version="4.3.0" />
-    <PackageReference Include="System.Diagnostics.FileVersionInfo" Version="4.3.0" />
-  </ItemGroup>
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'net451' ">
-    <DefineConstants>$(DefineConstants);NETFX</DefineConstants>
-    <DebugType>full</DebugType>
-  </PropertyGroup>
   <PropertyGroup Condition=" '$(TargetFramework)' == 'net461' ">
     <DefineConstants>$(DefineConstants);NETFX</DefineConstants>
     <DebugType>full</DebugType>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'netcoreapp1.1' ">
-    <DefineConstants>$(DefineConstants);CORECLR</DefineConstants>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard1.6' ">
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
     <DefineConstants>$(DefineConstants);CORECLR</DefineConstants>
   </PropertyGroup>  
 </Project>

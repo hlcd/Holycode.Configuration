@@ -2,56 +2,66 @@
 using Should;
 using System.Linq;
 using System.IO;
-using Xunit;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Microsoft.Extensions.Configuration;
 using Holycode.Configuration.Conventions;
 using System.Collections.Generic;
 using Microsoft.Extensions.Configuration.Memory;
+using static Holycode.Configuration.Tests.TestHelpers;
 
-namespace Holycode.Configuration.Tests.dotnet
+namespace Holycode.Configuration.Tests
 {
+    [TestClass]
     public class env_json_test
     {
-        [Fact]
+        [TestMethod]
         public void global_env_json_should_be_found()
         {
 
-            var src = ConfigFactory.CreateConfigSource(Path.GetFullPath("."));
+            var src = ConfigFactory.CreateConfigSource(GetPath("."));
             src.AddEnvJson(optional: false);
         }
 
-        [Fact]
+        [TestMethod]
         public void should_find_env_json_root_folder_with_absolute_path()
         {
-            var envPaths = new ConfigFileFinder().Find(Path.GetFullPath(@"input\reporoot1\subfolder\projectfolder\"), "env.json");
+            var envPaths = new ConfigFileFinder().Find(GetPath(@"input\reporoot1\subfolder\projectfolder\"), "env.json");
 
             envPaths.Count().ShouldBeGreaterThan(0);
-            envPaths.Last().Directory.ShouldEqual(Path.GetFullPath(@"input\reporoot1"));
+            envPaths.Last().Directory.ShouldEqual(GetPath(@"input\reporoot1"));
         }
 
-        [Fact]
+        [TestMethod]
         public void should_find_env_json_root_in_config_dir()
         {
-            var envPaths = new ConfigFileFinder().Find(Path.GetFullPath(@"input\reporoot1\subfolder\projectfolder\"), "config/env.json");
+            var envPaths = new ConfigFileFinder().Find(GetPath(@"input\reporoot1\subfolder\projectfolder\"), "config/env.json");
 
             envPaths.Count().ShouldBeGreaterThan(0);
-            envPaths.Last().Directory.ShouldEqual(Path.GetFullPath(@"input\reporoot1\config"));
+            envPaths.Last().Directory.ShouldEqual(GetPath(@"input\reporoot1\config"));
         }
 
 
-        [Fact]
+        [TestMethod]
         public void should_find_env_json_root_folder_with_relative_path()
         {
-            var envPaths = new ConfigFileFinder().Find(@"input\reporoot1\subfolder\projectfolder\", "env.json");
+            var d = Directory.GetCurrentDirectory();
+            try
+            {
+                Directory.SetCurrentDirectory(GetPath("."));
+                var envPaths = new ConfigFileFinder().Find(@"input\reporoot1\subfolder\projectfolder\", "env.json");
 
-            envPaths.Count().ShouldBeGreaterThan(0);
-            envPaths.Last().Directory.ShouldEqual(@"input\reporoot1");
+                envPaths.Count().ShouldBeGreaterThan(0);
+                envPaths.Last().Directory.ShouldEqual(@"input\reporoot1");
+            } finally
+            {
+                Directory.SetCurrentDirectory(d);
+            }
         }
 
-        [Fact]
+        [TestMethod]
         public void should_include_env_specific_config()
         {
-            var src = ConfigFactory.CreateConfigSource(Path.GetFullPath(@"input\reporoot1\subfolder\projectfolder\"));
+            var src = ConfigFactory.CreateConfigSource(GetPath(@"input\reporoot1\subfolder\projectfolder\"));
             src.AddEnvJson(optional: false);
 
             var val = src.Get("test_devel");
@@ -61,10 +71,10 @@ namespace Holycode.Configuration.Tests.dotnet
             val.ShouldEqual("test_from_devel");
         }
 
-        [Fact]
+        [TestMethod]
         public void should_load_specified_env()
         {
-            var src = ConfigFactory.CreateConfigSource(Path.GetFullPath(@"input\reporoot1\subfolder\projectfolder\"));
+            var src = ConfigFactory.CreateConfigSource(GetPath(@"input\reporoot1\subfolder\projectfolder\"));
             src.AddEnvJson(optional: false, environment: "test");
 
             var val = src.Get("test_local");
@@ -76,10 +86,10 @@ namespace Holycode.Configuration.Tests.dotnet
             isTest.ShouldEqual("true");
         }
 
-        [Fact]
+        [TestMethod]
         public void should_set_basepath_in_ctor()
         {
-            var p = Path.GetFullPath(@"input\reporoot1\subfolder\projectfolder\");
+            var p = GetPath(@"input\reporoot1\subfolder\projectfolder\");
             var src = ConfigFactory.CreateConfigSource(p);
 
             var basepath = src.AppBasePath();
@@ -88,10 +98,10 @@ namespace Holycode.Configuration.Tests.dotnet
             basepath.ShouldEqual(p);
         }
 
-        [Fact]
+        [TestMethod]
         public void should_include_override_config()
         {
-            var src = ConfigFactory.CreateConfigSource(Path.GetFullPath(@"input\reporoot1\subfolder\projectfolder\"));
+            var src = ConfigFactory.CreateConfigSource(GetPath(@"input\reporoot1\subfolder\projectfolder\"));
             src.AddEnvJson(optional: false, environment: "test");
 
             var val = src.Get("test_local");
@@ -100,7 +110,7 @@ namespace Holycode.Configuration.Tests.dotnet
             val.ShouldEqual("test_from_local");
         }
 
-        [Fact]
+        [TestMethod]
         public void in_mem_collection_order()
         {
             var src = new ConfigurationBuilder();
@@ -120,7 +130,7 @@ namespace Holycode.Configuration.Tests.dotnet
             val.ShouldEqual("val2");
         }
 
-        [Fact]
+        [TestMethod]
         public void in_mem_collection_replace()
         {
             var src = new ConfigurationBuilder();
@@ -143,10 +153,10 @@ namespace Holycode.Configuration.Tests.dotnet
             val.ShouldEqual("val2");
         }
 
-        [Fact]
+        [TestMethod]
         public void set_should_override_previous_set_values()
         {
-            var src = ConfigFactory.CreateConfigSource(Path.GetFullPath(@"input\reporoot1\subfolder\projectfolder\"));
+            var src = ConfigFactory.CreateConfigSource(GetPath(@"input\reporoot1\subfolder\projectfolder\"));
 
             src.Set("some_key", "from code");
             var val = src.Get("some_key");
@@ -157,10 +167,10 @@ namespace Holycode.Configuration.Tests.dotnet
             val.ShouldEqual("from code 1");
         }
 
-        [Fact]
+        [TestMethod]
         public void set_should_override_previous_file_values()
         {
-            var src = ConfigFactory.CreateConfigSource(Path.GetFullPath(@"input\reporoot1\subfolder\projectfolder\"));
+            var src = ConfigFactory.CreateConfigSource(GetPath(@"input\reporoot1\subfolder\projectfolder\"));
 
             src.Set("some_key", "from code");
             var val = src.Get("some_key");
@@ -183,10 +193,10 @@ namespace Holycode.Configuration.Tests.dotnet
         }
 
 
-        [Fact]
+        [TestMethod]
         public void should_include_env_override_config()
         {
-            var src = ConfigFactory.CreateConfigSource(Path.GetFullPath(@"input\reporoot1\subfolder\projectfolder\"));
+            var src = ConfigFactory.CreateConfigSource(GetPath(@"input\reporoot1\subfolder\projectfolder\"));
             src.AddEnvJson(optional: false, environment: "development");
 
             var val = src.Get("test_local");
@@ -203,10 +213,11 @@ namespace Holycode.Configuration.Tests.dotnet
             envVal.ShouldNotBeNull();
         }
 
-        [Fact]
+     
+        [TestMethod]
         public void should_include_env_default_config()
         {
-            var src = ConfigFactory.CreateConfigSource(Path.GetFullPath(@"input\reporoot2\subfolder"));
+            var src = ConfigFactory.CreateConfigSource(GetPath(@"input\reporoot2\subfolder"));
             src.AddEnvJson(optional: false);
     
             var trace = src.GetConfigTrace();
@@ -217,10 +228,10 @@ namespace Holycode.Configuration.Tests.dotnet
             val.ShouldEqual("default-env");
         }
 
-        [Fact]
+        [TestMethod]
         public void should_resolve_nearest_env_json_before_config_dir()
         {
-            var applicationBasePath = Path.GetFullPath(@"input\reporoot1");
+            var applicationBasePath = GetPath(@"input\reporoot1");
             string environment = null;
 
             var resolver = new ConfigSourceResolver(new[] {
@@ -235,11 +246,11 @@ namespace Holycode.Configuration.Tests.dotnet
             var cfgFiles = resolver.GetConfigSources().GetConfigFiles().ToArray();
 
             var expected = new[] {
-                Path.GetFullPath(@"input\reporoot1\env.default.json"),
-                Path.GetFullPath(@"input\reporoot1\env.json"),
-                Path.GetFullPath(@"input\reporoot1\env.development.json"),
-                Path.GetFullPath(@"input\reporoot1\env.override.json"),
-                Path.GetFullPath(@"input\reporoot1\env.development.override.json"),
+                GetPath(@"input\reporoot1\env.default.json"),
+                GetPath(@"input\reporoot1\env.json"),
+                GetPath(@"input\reporoot1\env.development.json"),
+                GetPath(@"input\reporoot1\env.override.json"),
+                GetPath(@"input\reporoot1\env.development.override.json"),
             };
 
             for (int i = 0; i < cfgFiles.Length && i < expected.Length; i++)
@@ -249,10 +260,10 @@ namespace Holycode.Configuration.Tests.dotnet
         }      
 
         /*
-         [Fact]
+         [TestMethod]
         public void should_resolve_nearest_env_json_for_specific_env()
         {
-            var applicationBasePath = Path.GetFullPath(@"input\reporoot1");
+            var applicationBasePath = GetPath(@"input\reporoot1");
             string environment = "from_config_dir";
 
             var resolver = new ConfigSourceResolver(new[] {
@@ -269,11 +280,11 @@ namespace Holycode.Configuration.Tests.dotnet
             var cfgFiles = resolver.GetConfigSources().GetConfigFiles().ToArray();
 
             var expected = new[] {
-                Path.GetFullPath(@"input\reporoot1\config\env.default.json"),
-                Path.GetFullPath(@"input\reporoot1\config\env.json"),
-                Path.GetFullPath(@"input\reporoot1\config\env.from_config_dir.json"),
-                Path.GetFullPath(@"input\reporoot1\config\env.override.json"),
-                Path.GetFullPath(@"input\reporoot1\config\env.from_config_dir.override.json"),
+                GetPath(@"input\reporoot1\config\env.default.json"),
+                GetPath(@"input\reporoot1\config\env.json"),
+                GetPath(@"input\reporoot1\config\env.from_config_dir.json"),
+                GetPath(@"input\reporoot1\config\env.override.json"),
+                GetPath(@"input\reporoot1\config\env.from_config_dir.override.json"),
             };
 
             for (int i = 0; i < cfgFiles.Length && i < expected.Length; i++)

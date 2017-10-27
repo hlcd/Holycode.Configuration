@@ -4,14 +4,16 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Xunit;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
+using Should;
 
-namespace common.configuration.tests
+namespace Holycode.Configuration.Tests
 {
+    [TestClass]
     public class logging_config_test
     {
-        [Fact]
+        [TestMethod]
         public void no_logging_config_should_not_throw()
         {
             string cfg = @"{
@@ -30,7 +32,7 @@ namespace common.configuration.tests
             builder.ConfigureSinks();
         }
 
-        [Fact]
+        [TestMethod]
         public void file_sink_config()
         {
             string cfgfile = @"{
@@ -53,8 +55,8 @@ namespace common.configuration.tests
             // this should not throw
             builder.ConfigureSinks();
 
-            Assert.True(builder.IsSinkEnabled("File"));
-            Assert.False(builder.IsSinkEnabled("Serilog"));
+            builder.IsSinkEnabled("File").ShouldBeTrue();
+            builder.IsSinkEnabled("Serilog").ShouldBeFalse();
 
         }
     }

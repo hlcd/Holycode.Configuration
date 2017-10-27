@@ -23,7 +23,7 @@ namespace Holycode.Configuration.Serilog
         private readonly string appname;
         private readonly IConfiguration configuration;
         private readonly string prefix = "x";
-        private readonly bool isAzureWebsite;
+        private readonly bool isAzureWebsite = false;
         private readonly string env;
         public Action<string> LogCallback {get;set;}
 

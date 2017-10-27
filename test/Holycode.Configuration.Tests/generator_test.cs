@@ -3,23 +3,25 @@ using Should;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Xunit;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using static Holycode.Configuration.Tests.TestHelpers;
 
-namespace Holycode.Configuration.Tests.dotnet
+namespace Holycode.Configuration.Tests
 {
+    [TestClass]
     public class generator_test
     {
-        //[Fact]
+        [TestMethod]
         public void generate_config()
         {
             var generator = new ConfigGenerator();
 
-            var cfg = generator.GenerateConfig("config-gen/config/beta-pl.config", "beta-pl");
+            var cfg = generator.GenerateConfig(GetPath("input/config-gen/config/source/beta-pl/beta-pl.config"), "beta-pl");
 
-            Assert.True(false, "don't know how to verify generated config");
+            Assert.Inconclusive("don't know how to verify generated config");
         }
 
-        [Fact]
+        [TestMethod]
         public void process_line_simple()
         {
             var generator = new ConfigGenerator();
@@ -33,7 +35,7 @@ namespace Holycode.Configuration.Tests.dotnet
 
         }
 
-        [Fact]
+        [TestMethod]
         public void process_line_variable()
         {
             var generator = new ConfigGenerator();
@@ -54,7 +56,7 @@ namespace Holycode.Configuration.Tests.dotnet
             diff.AreEqual.ShouldBeTrue(diff.ToString());            
         }
 
-        [Fact]
+        [TestMethod]
         public void variables_replacement_simple()
         {
             var vars = new Dictionary<string, string>() {
@@ -70,7 +72,7 @@ namespace Holycode.Configuration.Tests.dotnet
                 .ShouldEqual("val1, hello, World!");
         }
 
-        [Fact]
+        [TestMethod]
         public void variables_replacement_nested()
         {
             var vars = new Dictionary<string, string>() {
