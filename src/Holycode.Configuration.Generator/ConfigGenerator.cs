@@ -11,24 +11,28 @@ namespace Holycode.Configuration.Generator
     public class ConfigGenerator
     {
         private const string varPattern = @"\{(\?{0,1}[a-zA-Z0-9_.:]+?)\}";
-        //private const string sourceDirName = "source";
+        private const string sourceDirName = "source";
         //private string baseDir;
         private Dictionary<string, string> variables = new Dictionary<string, string>();
         public ConfigGenerator()
         {
         }
 
-        public string GenerateConfig(string inputFile, string environment)
+        public void GenerateConfig(string baseDir, string environment, string outDir = null)
         {
-            //var files = Directory.GetFiles($"{baseDir}/{sourceDirName}/{environment}");
+            outDir = outDir ?? baseDir;
+            var srcDir = Path.GetFullPath($"{baseDir}/{sourceDirName}/{environment}");
+            var files = Directory.GetFiles(srcDir);
 
-            //foreach(var file in files)
-            //{
-            //    ProcessFile(file);
-            //}
-            var r = ProcessFile(inputFile);
+            foreach (var file in files)
+            {
+                if (Path.GetFileName(file).StartsWith("_")) continue;
+                var r = ProcessFile(file);
+                var relpath = file.Replace(srcDir, "").Trim('\\').Trim('/');
+                var outfile = Path.Combine(outDir, relpath);
 
-            return r;
+                File.WriteAllText(outfile, r);
+            }            
         }
 
         internal string ProcessLine(string line)
@@ -66,9 +70,12 @@ namespace Holycode.Configuration.Generator
             return line;
         }
 
-        internal string ProcessContent(IEnumerable<string> lines, string type)
+        internal string ProcessContent(IEnumerable<string> lines, string filepath)
         {
-            IConfiguration cfg = null; 
+            IConfiguration cfg = null;
+
+            lines = PreProcess(lines, filepath);
+            var type = Path.GetExtension(filepath);
             switch(type)
             {
                 case "xml":
@@ -80,9 +87,11 @@ namespace Holycode.Configuration.Generator
                 case ".json":
                     cfg = Helpers.LoadJsonConfigString(lines);
                     break;
+                default:
+                    throw new NotSupportedException($"don't know how to handle file {filepath}");
             }
 
-            if (cfg != null) AddVariables(cfg.AsDictionaryPlain());
+            AddVariables(cfg.AsDictionaryPlain());
 
             var result = new StringBuilder();
             foreach (var line in lines)
@@ -91,6 +100,42 @@ namespace Holycode.Configuration.Generator
             }
 
             return result.ToString();
+        }
+
+        private IEnumerable<string> PreProcess(IEnumerable<string> lines, string filepath)
+        {
+            const string varsDirective = @"\[\[\s*vars\s+(?<file>.*)\s*\]\]";
+            foreach(var line in lines)
+            {
+                var m = Regex.Match(line, varsDirective, RegexOptions.IgnoreCase);
+                if (m.Success)
+                {
+                    var incl = m.Groups["file"].Value;
+                    incl = Path.Combine(Path.GetDirectoryName(filepath), incl);
+                    AddVariables(incl);
+                    continue;
+                }
+
+                yield return line;
+            }
+        }
+
+        private void AddVariables(string file)
+        {
+            IConfiguration cfg = null;
+            var ext = Path.GetExtension(file);
+            switch (ext) {
+                case ".xml":
+                    cfg = new ConfigurationBuilder().AddXmlAppSettings(file, optional: false).Build();
+                    break;
+                case ".json":
+                    cfg = new ConfigurationBuilder().AddXmlAppSettings(file, optional: false).Build();
+                    break;
+                default:
+                    throw new NotSupportedException($"file format {ext} is not supported as variables source");
+            }
+
+            AddVariables(cfg.AsDictionaryPlain());
         }
 
         private void AddVariables(Dictionary<string, string> dictionary)
@@ -110,7 +155,7 @@ namespace Holycode.Configuration.Generator
         {            
             var content = File.ReadAllLines(file);
 
-            var result = ProcessContent(content, Path.GetExtension(file));
+            var result = ProcessContent(content, file);
 
             return result;
         }

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using static Holycode.Configuration.Tests.TestHelpers;
+using System.IO;
 
 namespace Holycode.Configuration.Tests
 {
@@ -15,10 +16,15 @@ namespace Holycode.Configuration.Tests
         public void generate_config()
         {
             var generator = new ConfigGenerator();
+            using (var dir = new TestDir())
+            {
+                var cfgDir = GetPath("input/config-gen/config/");
 
-            var cfg = generator.GenerateConfig(GetPath("input/config-gen/config/source/beta-pl/beta-pl.config"), "beta-pl");
+                generator.GenerateConfig(cfgDir, "beta-pl", outDir: dir.BasePath);
 
-            Assert.Inconclusive("don't know how to verify generated config");
+                File.Exists(Path.Combine(dir.BasePath, "beta-pl.config")).ShouldBeTrue();
+                File.Exists(Path.Combine(dir.BasePath, "env.beta-pl.json")).ShouldBeTrue();
+            }
         }
 
         [TestMethod]
@@ -79,7 +85,7 @@ namespace Holycode.Configuration.Tests
                 <add key=""key2"" value=""val1"" />
             ");
 
-            var r = generator.ProcessContent(input.Split("/r/n"), "xml");
+            var r = generator.ProcessContent(input.Split("/r/n"), "dummy.xml");
             var processed = Helpers.LoadXMLConfigLines(r);
 
             var diff = new ConfigComparer().Compare(expected, processed);
@@ -103,7 +109,7 @@ namespace Holycode.Configuration.Tests
                 <add key=""slave2"" value=""slaveval"" />
             ");
 
-            var r = generator.ProcessContent(input.Split("/r/n"), "xml");
+            var r = generator.ProcessContent(input.Split("/r/n"), "dummy.xml");
             var processed = Helpers.LoadXMLConfigLines(r);
 
             var diff = new ConfigComparer().Compare(expected, processed);
@@ -129,7 +135,7 @@ namespace Holycode.Configuration.Tests
                 <add key=""slave3"" value=""slaveval"" />
             ");
 
-            var r = generator.ProcessContent(input.Split("/r/n"), "xml");
+            var r = generator.ProcessContent(input.Split("/r/n"), "dummy.xml");
             var processed = Helpers.LoadXMLConfigLines(r);
 
             var diff = new ConfigComparer().Compare(expected, processed);
