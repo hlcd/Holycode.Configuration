@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.Configuration;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
@@ -21,6 +22,34 @@ namespace Holycode.Configuration.Tests
             //}
             return Path.Combine(cb, v);
         }
+
+    }
+
+    class TestDir : IDisposable
+    {
+        public string BasePath { get; }
+
+        public TestDir()
+        {
+            this.BasePath = System.IO.Path.GetTempPath() + "/" + Guid.NewGuid().ToString("n");
+            Directory.CreateDirectory(this.BasePath);
+        }
+
+
+        public void Dispose()
+        {
+            if (Directory.Exists(BasePath)) Directory.Delete(BasePath, recursive: true);
+        }
+
+        public string CreateFile(string path, string content)
+        {
+            var fullpath = Path.Combine(BasePath, path);
+            File.WriteAllText(fullpath, content);
+
+            return fullpath;
+        }
+
+        internal string CreateAppSettingsFile(string path, string content) => CreateFile(path, "<appSettings>" + content + "</appSettings>");
 
     }
 }

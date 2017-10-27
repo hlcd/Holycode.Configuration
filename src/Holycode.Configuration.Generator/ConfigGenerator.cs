@@ -39,22 +39,29 @@ namespace Holycode.Configuration.Generator
         internal static string ReplaceVariables(string line, Dictionary<string, string> variables)
         {
             bool isMatch = false;
+            bool replaced = false;
             do
             {
                 var matches = Regex.Matches(line, varPattern);
                 isMatch = matches.Count > 0;
+                replaced = false;
+
                 if (isMatch)
                 {
                     foreach (Match match in matches)
                     {
                         var key = match.Groups[1].Value;
+                        var originalKey = key;
+                        // replace . with new way of hierarchical reference
+                        key = key.Replace(".", ":");
                         if (variables.ContainsKey(key))
                         {
-                            line = line.Replace("{" + key + "}", variables[key]);
+                            line = line.Replace("{" + originalKey + "}", variables[key]);
+                            replaced = true;
                         }
                     }
                 }
-            } while (isMatch);
+            } while (replaced);
 
             return line;
         }
