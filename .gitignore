@@ -12,4 +12,4 @@ test/.results/
 /dnx-packages
 .vscode/
 *.nupkg
-_ReSharper.Caches/ReSharperPlatformVs16193_6aa3fe65.Holycode.Configuration.00/AspFileDataCache.dat
+_ReSharper.Caches/
