@@ -47,7 +47,7 @@ namespace Holycode.Configuration.Tests
             builder.UseFileSink();
             global::Serilog.Log.Logger = builder.CreateLogger();
 
-            log4net.Appender.Serilog.Configuration.Configure(repo);
+            global::log4net.Appender.Serilog.Configuration.Configure(repo);
 
             try
             {
