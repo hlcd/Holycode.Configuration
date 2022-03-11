@@ -1,30 +1,30 @@
 ﻿using System;
 using System.IO;
 using System.Text;
+using JsonDiffPatchDotNet;
+using Newtonsoft.Json.Linq;
 
 namespace Holycode.Configuration.Converter
 {
     class Program
     {
         /// <summary>
-        /// Perform transformation between xml and json file format.
+        /// Perform transformation from xml to json file format.
         /// </summary>
         /// <param name="input">input file</param>
         /// <param name="output">output file</param>
-        /// <param name="from">input file format</param>
-        /// <param name="to">output file format</param>
-        /// <param name="append">
-        /// should we append existing <paramref name="output"/> file. If not, file is overwritten.
-        /// </param>
-        /// <param name="inputNode">the node in input file which will be converted. Supported formats are xpath and json path. If not given, entire input is converted.</param>
+        /// <param name="inputNode">the node in input file which will be converted, given as XPath. If not given, entire input is converted.</param>
         /// <param name="outputNode">
-        /// the node in output file where converted items will be placed. Supported formats are xpath and json path. If not given, entire output overwrites entire document - must not be be mixed with <c>append</c> option in this case.
+        /// the node in output file where converted items will be placed, given as JsonPath. If not given, entire output overwrites entire document - must not be be mixed with <c>append</c> option in this case.
         /// </param>
-        /// 
-        static void Main(FileInfo input, FileInfo output, Format from = Format.Xml, Format to = Format.Json,
-            string? inputNode = null, string? outputNode = null)
+        /// <param name="diffBase">
+        /// The file used as diff. Output file with only contain diff between <c>diffBase</c> and generated output.
+        /// If <paramref name="outputNode"/> is specified, it used to for diffBase file too.
+        /// </param>
+        static void Main(FileInfo input, FileInfo output,
+            string? inputNode = null, string? outputNode = null, FileInfo? diffBase = null)
         {
-            string? error = Validate(input, output, from, to, inputNode, outputNode);
+            string? error = Validate(input, output, inputNode, outputNode, diffBase);
             if (error != null)
             {
                 Console.WriteLine($"ERROR: {error}");
@@ -35,16 +35,9 @@ namespace Holycode.Configuration.Converter
                 FileMode outputMode = outputNode != null ? FileMode.OpenOrCreate : FileMode.Create;
                 string newContent;
                 using (Stream inputStream = input.OpenRead())
-                using (Stream outputStream = output.Open(outputMode, FileAccess.ReadWrite, FileShare.Read))
+                using (FileStream outputStream = output.Open(outputMode, FileAccess.ReadWrite, FileShare.Read))
                 {
-                    if (from == Format.Xml)
-                    {
-                        newContent = FromXml.Convert(inputStream, outputStream, inputNode, outputNode);
-                    }
-                    else
-                    {
-                        throw new NotSupportedException($"converting from {from} input is not supported");
-                    }
+                    newContent = FromXml.Convert(inputStream, outputStream, inputNode, outputNode, diffBase);
                 }
 
                 using (Stream saveResult = output.Open(FileMode.Create))
@@ -60,8 +53,8 @@ namespace Holycode.Configuration.Converter
             }
         }
 
-        private static string? Validate(FileInfo? input, FileInfo? output, Format from, Format to,
-            string? inputNode, string? outputNode)
+        private static string? Validate(FileInfo? input, FileInfo? output, 
+            string? inputNode, string? outputNode, FileInfo? diff)
         {
             if (input == null)
             {
@@ -81,9 +74,9 @@ namespace Holycode.Configuration.Converter
                 return $"cannot append, because output file was not found: {output.FullName}";
             }
 
-            if (from == to)
+            if (diff != null && !diff.Exists)
             {
-                return "input are output format are the same";
+                return $"diff base file {diff.FullName} was not found";
             }
 
             return null;
