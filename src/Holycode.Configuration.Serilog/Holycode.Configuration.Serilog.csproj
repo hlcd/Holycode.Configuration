@@ -24,12 +24,12 @@
     <ProjectReference Include="..\Holycode.Configuration\Holycode.Configuration.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Serilog" Version="2.5.0" />
+    <PackageReference Include="Serilog" Version="2.10.0" />
     <PackageReference Include="Serilog.Sinks.Literate" Version="3.0.0" />
     <PackageReference Include="Serilog.Sinks.RollingFile" Version="3.3.0" />
     <PackageReference Include="Serilog.Sinks.CustomRollingFile" Version="2.0.7-*" />
-    <PackageReference Include="Serilog.Sinks.Elasticsearch" Version="5.3.0" />
+    <PackageReference Include="Serilog.Sinks.Elasticsearch" Version="8.4.1" />
     <PackageReference Include="Serilog.Sinks.Trace" Version="2.1.0" />
-    <PackageReference Include="Serilog.Sinks.Graylog" Version="1.5.0" />
+    <PackageReference Include="Serilog.Sinks.Graylog" Version="2.3.0" />
   </ItemGroup>
 </Project>

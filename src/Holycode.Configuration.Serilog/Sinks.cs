@@ -70,7 +70,7 @@ namespace Holycode.Configuration.Serilog
             var uri = new Uri(graylogConnectionString);
             var opts = new GraylogSinkOptions()
             {
-                HostnameOrAdress = uri.Host,
+                Host = uri.Host,
                 Port = uri.Port,
             };
 
