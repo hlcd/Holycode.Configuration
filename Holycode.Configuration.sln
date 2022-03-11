@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27019.1
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32002.261
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{0420695C-3739-4B38-B52E-3E4F26AE191B}"
 EndProject
@@ -22,9 +22,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Holycode.Configuration.Seri
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Holycode.Configuration.CLI", "src\Holycode.Configuration.CLI\Holycode.Configuration.CLI.csproj", "{CC8BBFAB-DAD1-4B49-B245-5EB84411EBED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Holycode.Configuration.Generator", "src\Holycode.Configuration.Generator\Holycode.Configuration.Generator.csproj", "{479CA14F-EEA2-4520-8D06-A04B2DE13600}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Holycode.Configuration.Generator", "src\Holycode.Configuration.Generator\Holycode.Configuration.Generator.csproj", "{479CA14F-EEA2-4520-8D06-A04B2DE13600}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Holycode.Configuration.Tests", "test\Holycode.Configuration.Tests\Holycode.Configuration.Tests.csproj", "{1058405C-7DCC-4924-AF25-1A85AB7E2254}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Holycode.Configuration.Tests", "test\Holycode.Configuration.Tests\Holycode.Configuration.Tests.csproj", "{1058405C-7DCC-4924-AF25-1A85AB7E2254}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{41C11836-10EA-4CD1-8399-B34062745F16}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Holycode.Configuration.Converter", "tools\Holycode.Configuration.Converter\Holycode.Configuration.Converter.csproj", "{21168CBE-68A6-4885-96A6-1EBE7F8D74EC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -156,6 +160,18 @@ Global
 		{1058405C-7DCC-4924-AF25-1A85AB7E2254}.Release|x64.Build.0 = Release|Any CPU
 		{1058405C-7DCC-4924-AF25-1A85AB7E2254}.Release|x86.ActiveCfg = Release|Any CPU
 		{1058405C-7DCC-4924-AF25-1A85AB7E2254}.Release|x86.Build.0 = Release|Any CPU
+		{21168CBE-68A6-4885-96A6-1EBE7F8D74EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21168CBE-68A6-4885-96A6-1EBE7F8D74EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21168CBE-68A6-4885-96A6-1EBE7F8D74EC}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{21168CBE-68A6-4885-96A6-1EBE7F8D74EC}.Debug|x64.Build.0 = Debug|Any CPU
+		{21168CBE-68A6-4885-96A6-1EBE7F8D74EC}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{21168CBE-68A6-4885-96A6-1EBE7F8D74EC}.Debug|x86.Build.0 = Debug|Any CPU
+		{21168CBE-68A6-4885-96A6-1EBE7F8D74EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21168CBE-68A6-4885-96A6-1EBE7F8D74EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21168CBE-68A6-4885-96A6-1EBE7F8D74EC}.Release|x64.ActiveCfg = Release|Any CPU
+		{21168CBE-68A6-4885-96A6-1EBE7F8D74EC}.Release|x64.Build.0 = Release|Any CPU
+		{21168CBE-68A6-4885-96A6-1EBE7F8D74EC}.Release|x86.ActiveCfg = Release|Any CPU
+		{21168CBE-68A6-4885-96A6-1EBE7F8D74EC}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -171,6 +187,7 @@ Global
 		{CC8BBFAB-DAD1-4B49-B245-5EB84411EBED} = {CD0955D5-CCB3-4E96-B9F7-834FA6A4EC16}
 		{479CA14F-EEA2-4520-8D06-A04B2DE13600} = {CD0955D5-CCB3-4E96-B9F7-834FA6A4EC16}
 		{1058405C-7DCC-4924-AF25-1A85AB7E2254} = {0420695C-3739-4B38-B52E-3E4F26AE191B}
+		{21168CBE-68A6-4885-96A6-1EBE7F8D74EC} = {41C11836-10EA-4CD1-8399-B34062745F16}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {66FE1631-F972-47D2-8907-B045280D62C8}
