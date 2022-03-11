@@ -9,6 +9,11 @@
     <AssemblyName>Holycode.Configuration.Serilog.Aspnet5</AssemblyName>
     <OutputType>Library</OutputType>
     <PackageId>Holycode.Configuration.Serilog.Aspnet5</PackageId>
+	  <PackegeIconUrl>http://holy.co.de/wp-content/uploads/2016/01/ico-64x64.png</PackegeIconUrl>
+	  <RepositoryUrl>https://github.com/hlcd/Holycode.Configuration</RepositoryUrl>
+	  <PackageProjectUrl>https://github.com/hlcd/Holycode.Configuration</PackageProjectUrl>
+	  <RepositoryType>git</RepositoryType>
+	  <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Holycode.Configuration\Holycode.Configuration.csproj" />
@@ -17,11 +22,6 @@
   <ItemGroup>
     <PackageReference Include="SerilogWeb.Classic" Version="2.0.10" />
     <PackageReference Include="log4net.Appender.Serilog" Version="1.0.5-master008-6b3d7" />
-  </ItemGroup>
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net451' ">
-    <Reference Include="System.Web" />
-    <Reference Include="System" />
-    <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Web" />

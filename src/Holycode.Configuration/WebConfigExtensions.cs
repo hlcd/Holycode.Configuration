@@ -1,4 +1,4 @@
-﻿#if NETFX
+﻿
 
 using System;
 using System.Collections.Generic;
@@ -79,5 +79,3 @@ namespace Microsoft.Extensions.Configuration
         }
     }
 }
-
-#endif

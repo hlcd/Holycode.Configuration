@@ -14,11 +14,9 @@ namespace Microsoft.Extensions.Configuration
     {
         private static ILog debugLog = LogManager.GetLogger(typeof (LogConfigExtensions));
         private static Assembly rootAssembly = typeof (LogConfigExtensions).GetTypeInfo().Assembly;
-        #if CORECLR
+        
         private static ILog rootLog => LogManager.GetLogger(rootAssembly, "root");
-        #else 
-        private static ILog rootLog => LogManager.GetLogger("root");
-        #endif
+        
         public static IConfiguration ConfigureLog4net(this IConfiguration config, string appName, ILog log = null, string logRootPath = null, bool internalDebug = false)
         {
             if (internalDebug)
