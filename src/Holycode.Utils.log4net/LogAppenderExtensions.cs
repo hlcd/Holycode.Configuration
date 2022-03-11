@@ -30,11 +30,6 @@ namespace log4net
             => log.AddAppender(AppenderFactory.CreateAnsiColorTerminalAppender());
 
 
-#if !CORECLR
-        public static void AddSmtpAppender(this ILog log, string sendTo, string programName = "", Level levelMin = null)
-            => log.AddAppender(AppenderFactory.CreateSmtpAppender(sendTo, programName, levelMin));
-#endif
-
         public static void AddCallbackAppender(this ILog log, Action<string, LoggingEvent> callback)
             => log.AddAppender(AppenderFactory.CreateCallbackAppender(callback));
 
