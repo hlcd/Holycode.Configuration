@@ -1,13 +1,21 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Description>no description</Description>
-    <VersionPrefix>1.0.0-master001-013f8</VersionPrefix>
+    <Description>Middleware collection</Description>
+	  <PackageReleaseNotes>
+		  v 2.0.0 - netstandard support
+	  </PackageReleaseNotes>
+    <VersionPrefix>2.0.0-dotnet-001</VersionPrefix>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <DebugType>portable</DebugType>
     <AssemblyName>Holycode.AspNetCore.Middleware</AssemblyName>
     <OutputType>Library</OutputType>
     <PackageId>Holycode.AspNetCore.Middleware</PackageId>
+	  <PackegeIconUrl>http://holy.co.de/wp-content/uploads/2016/01/ico-64x64.png</PackegeIconUrl>
+	  <RepositoryUrl>https://github.com/hlcd/Holycode.Configuration</RepositoryUrl>
+	  <PackageProjectUrl>https://github.com/hlcd/Holycode.Configuration</PackageProjectUrl>
+	  <RepositoryType>git</RepositoryType>
+	  <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>

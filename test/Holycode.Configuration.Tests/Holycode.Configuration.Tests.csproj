@@ -8,7 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="log4net.Appender.Serilog">
-      <Version>1.0.5-master008-6b3d7</Version>
+      <Version>2.0.0-dotnet-001</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.1.0" />
     <PackageReference Include="MSTest.TestAdapter" Version="2.2.8" />

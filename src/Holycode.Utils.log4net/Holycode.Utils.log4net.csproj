@@ -7,7 +7,11 @@
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <AssemblyName>Holycode.Utils.log4net</AssemblyName>
     <PackageId>Holycode.Utils.log4net</PackageId>
-    <Company>Holycode</Company>
+	  <TargetFrameworks>netstandard2.0</TargetFrameworks>
+	  <PackageReleaseNotes>
+		  v 3.0.0 - netstandard support
+	  </PackageReleaseNotes>
+	  <Company>Holycode</Company>
 	  <PackegeIconUrl>http://holy.co.de/wp-content/uploads/2016/01/ico-64x64.png</PackegeIconUrl>
 	  <RepositoryUrl>https://github.com/hlcd/Holycode.Configuration</RepositoryUrl>
 	  <PackageProjectUrl>https://github.com/hlcd/Holycode.Configuration</PackageProjectUrl>
