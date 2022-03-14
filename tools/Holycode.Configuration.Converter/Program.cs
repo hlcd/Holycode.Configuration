@@ -2,6 +2,8 @@
 using System.IO;
 using System.Text;
 using JsonDiffPatchDotNet;
+using Microsoft.AspNetCore.JsonPatch;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace Holycode.Configuration.Converter
@@ -21,8 +23,13 @@ namespace Holycode.Configuration.Converter
         /// The file used as diff. Output file with only contain diff between <c>diffBase</c> and generated output.
         /// If <paramref name="outputNode"/> is specified, it used to for diffBase file too.
         /// </param>
+        /// <param name="asPatch">
+        /// If <c>true</c> and <paramref name="diffBase"/> was used too, generated configuration node will be stored
+        /// as json patch. This is required to properly handle scenarios where xml configuration node contains
+        /// arrays.
+        /// </param>
         static void Main(FileInfo input, FileInfo output,
-            string? inputNode = null, string? outputNode = null, FileInfo? diffBase = null)
+            string? inputNode = null, string? outputNode = null, FileInfo? diffBase = null, bool asPatch = false)
         {
             string? error = Validate(input, output, inputNode, outputNode, diffBase);
             if (error != null)
@@ -37,7 +44,7 @@ namespace Holycode.Configuration.Converter
                 using (Stream inputStream = input.OpenRead())
                 using (FileStream outputStream = output.Open(outputMode, FileAccess.ReadWrite, FileShare.Read))
                 {
-                    newContent = FromXml.Convert(inputStream, outputStream, inputNode, outputNode, diffBase);
+                    newContent = FromXml.Convert(inputStream, outputStream, inputNode, outputNode, diffBase, asPatch);
                 }
 
                 using (Stream saveResult = output.Open(FileMode.Create))
