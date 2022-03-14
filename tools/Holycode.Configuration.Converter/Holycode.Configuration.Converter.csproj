@@ -5,6 +5,8 @@
     <TargetFramework>net6.0</TargetFramework>
     <AssemblyName>hlcd-config-converter</AssemblyName>
     <Nullable>enable</Nullable>
+	<PublishSingleFile>true</PublishSingleFile>
+	<SelfContained>false</SelfContained>
   </PropertyGroup>
 
   <ItemGroup>
