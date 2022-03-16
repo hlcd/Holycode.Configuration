@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Nodes;
 using System.Xml.Linq;
 using System.Xml.XPath;
 using JsonDiffPatchDotNet;
@@ -184,8 +185,6 @@ namespace Holycode.Configuration.Converter
         private static readonly IObjectAdapter adapter = new EmptyObjectAdapter(
             new ObjectAdapter(new DefaultContractResolver(), null));
 
-        private const string LoggerNode = "logger";
-
         private static JToken CalculateDiff(FileInfo diffBase, string nodeAsJson, string? outputNode, bool asPatch)
         {
             var diffMaker = new JsonDiffPatch(new Options()
@@ -208,16 +207,8 @@ namespace Holycode.Configuration.Converter
                 JToken delta = diffMaker.Diff(diffBaseJson, obj);
 
                 PatchContainer patchOperations = AsPatch(delta);
-                foreach (var operation in patchOperations.Operations)
-                {
-                    if (operation?.Path == "/" + LoggerNode
-                        && operation.Op == OperationTypes.Replace)
-                    {
-                        //indicates insert at the end of the table
-                        operation.Path += "/-";
-                        operation.Op = OperationTypes.Add;
-                    }
-                }
+                patchOperations = HandleAdditiveLoggers(patchOperations);
+                
                 if (asPatch)
                 {
                     return JToken.Parse(JsonConvert.SerializeObject((patchOperations)));
@@ -229,6 +220,49 @@ namespace Holycode.Configuration.Converter
 
                 return result;
             }
+        }
+
+        private const string LoggerNode = "logger";
+
+        private static PatchContainer HandleAdditiveLoggers(PatchContainer patch)
+        {
+            var toRemove = new List<Operation>();
+            var newOperations = new List<Operation>();
+            foreach (var operation in patch.Operations)
+            {
+                if (operation?.Path == "/" + LoggerNode
+                    && operation.Op == OperationTypes.Replace)
+                {
+                    if (operation.Value is JArray newLoggersArray)
+                    {
+                        //we need to convert operation of replacing array
+                        //to set of add item operations
+                        foreach (JToken logger in newLoggersArray)
+                        {
+                            newOperations.Add(new Operation(OperationTypes.Add, operation.Path + "/-", null, logger));
+                        }
+
+                        toRemove.Add(operation);
+                    }
+                    else
+                    {
+                        //indicates insert at the end of the table
+                        operation.Path += "/-";
+                        operation.Op = OperationTypes.Add;
+                    }
+                }
+            }
+
+            foreach (var operation in toRemove)
+            {
+                patch.Operations.Remove(operation);
+            }
+            foreach (var operation in newOperations)
+            {
+                patch.Operations.Add(operation);
+            }
+
+            return patch;
         }
 
         private static PatchContainer AsPatch(JToken delta)
