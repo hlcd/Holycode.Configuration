@@ -213,6 +213,8 @@ namespace Holycode.Configuration.Converter
                     if (operation?.Path == "/" + LoggerNode
                         && operation.Op == OperationTypes.Replace)
                     {
+                        //indicates insert at the end of the table
+                        operation.Path += "/-";
                         operation.Op = OperationTypes.Add;
                     }
                 }
