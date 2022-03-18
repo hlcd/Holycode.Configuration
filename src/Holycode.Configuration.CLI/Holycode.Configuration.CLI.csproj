@@ -4,7 +4,7 @@
     <VersionPrefix>3.0.3</VersionPrefix>
     <VersionSuffix>master000-5b427</VersionSuffix>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <AssemblyName>hcfg</AssemblyName>
   </PropertyGroup>
 

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.JsonPatch.Adapters;
 using Microsoft.AspNetCore.JsonPatch.Internal;
+using Microsoft.AspNetCore.JsonPatch.Operations;
 using Newtonsoft.Json.Linq;
 
 namespace Holycode.Configuration.Converter;
@@ -13,7 +14,7 @@ internal class EmptyObjectAdapter : IObjectAdapter
         this.adapter = adapter;
     }
 
-    private void EnsurePathExists(Microsoft.AspNetCore.JsonPatch.Operations.Operation operation, object obj)
+    private void EnsurePathExists(Operation operation, object obj)
     {
         ParsedPath path = new ParsedPath(operation.path);
         foreach (var pathSegment in path.Segments)
@@ -31,31 +32,31 @@ internal class EmptyObjectAdapter : IObjectAdapter
         }
     }
 
-    void IObjectAdapter.Add(Microsoft.AspNetCore.JsonPatch.Operations.Operation operation, object objectToApplyTo)
+    void IObjectAdapter.Add(Operation operation, object objectToApplyTo)
     {
         EnsurePathExists(operation, objectToApplyTo);
         adapter.Add(operation, objectToApplyTo);
     }
 
-    void IObjectAdapter.Copy(Microsoft.AspNetCore.JsonPatch.Operations.Operation operation, object objectToApplyTo)
+    void IObjectAdapter.Copy(Operation operation, object objectToApplyTo)
     {
         EnsurePathExists(operation, objectToApplyTo);
         adapter.Copy(operation, objectToApplyTo);
     }
 
-    void IObjectAdapter.Move(Microsoft.AspNetCore.JsonPatch.Operations.Operation operation, object objectToApplyTo)
+    void IObjectAdapter.Move(Operation operation, object objectToApplyTo)
     {
         EnsurePathExists(operation, objectToApplyTo);
         adapter.Move(operation, objectToApplyTo);
     }
 
-    void IObjectAdapter.Remove(Microsoft.AspNetCore.JsonPatch.Operations.Operation operation, object objectToApplyTo)
+    void IObjectAdapter.Remove(Operation operation, object objectToApplyTo)
     {
         EnsurePathExists(operation, objectToApplyTo);
         adapter.Remove(operation, objectToApplyTo);
     }
 
-    void IObjectAdapter.Replace(Microsoft.AspNetCore.JsonPatch.Operations.Operation operation, object objectToApplyTo)
+    void IObjectAdapter.Replace(Operation operation, object objectToApplyTo)
     {
         EnsurePathExists(operation, objectToApplyTo);
         adapter.Replace(operation, objectToApplyTo);

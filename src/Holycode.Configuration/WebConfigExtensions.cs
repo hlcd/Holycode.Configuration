@@ -52,10 +52,7 @@ namespace Microsoft.Extensions.Configuration
             {
                 var val = ConfigManager.AppSettings[k];
                 configuration.Set(k.Replace(".", ":"), val);
-                //var check = configuration.Get(k.Replace(".", ":"));
             }
-
-
 
             var connectionStrings = ConfigManager.ConnectionStrings;
             foreach (ConnectionStringSettings c in connectionStrings)

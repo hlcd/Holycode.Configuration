@@ -1,12 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Dynamic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Text.Json;
-using System.Text.Json.Nodes;
 using System.Xml.Linq;
 using System.Xml.XPath;
 using JsonDiffPatchDotNet;
@@ -55,65 +49,7 @@ namespace Holycode.Configuration.Converter
                 .Replace(@"""from"": null,", string.Empty)
                 .Replace(@"""value"": null,", string.Empty);
         }
-        /*
-        private static XElement ConvertArraysToDictionaries(XElement root)
-        {
-            XElement rootCopy = new XElement(root.Name);
-            foreach (XAttribute xAttribute in root.Attributes())
-            {
-                rootCopy.SetAttributeValue(xAttribute.Name, xAttribute.Value);
-            }
 
-            var childGroups = root.Elements()
-                .GroupBy(e => e.Name)
-                .Select(g => new { g.Key, Count = g.Count() });
-            foreach (var childGroup in childGroups)
-            {
-                if (childGroup.Count == 1)
-                {
-                    XElement child = root.Element(childGroup.Key)!;
-                    rootCopy.Add(ConvertArraysToDictionaries(child));
-                }
-                else
-                {
-                    XName? keyAttribute = SelectGroupKey(childGroup.Key, root, childGroup.Count);
-                    if (keyAttribute == null)
-                    {
-                        throw new InvalidOperationException(
-                            $"unable to select key attribute for elements {childGroup.Key} " +
-                            $"of node {root.Name}");
-                    }
-
-                    foreach (XElement xElement in root.Elements(childGroup.Key))
-                    {
-                        XAttribute key = xElement.Attribute(keyAttribute!)!;
-                        XElement converted = ConvertArraysToDictionaries(xElement);
-                        XElement newChild = new XElement(key.Value, converted, new XAttribute("fromArray", "true"));
-                        rootCopy.Add(newChild);
-                    }
-                }
-            }
-
-
-            return rootCopy;
-        }
-
-        private static XName? SelectGroupKey(XName elementName, XElement root, int elementCount)
-        {
-            return root.Elements(elementName)
-                //select an attribute
-                .SelectMany(e => e.Attributes())
-                //which is in preffered keys set
-                .Where(a => PreferredDictionaryKeys.Contains(a.Name))
-                .GroupBy(a => a.Name)
-                //and is set for each element with unique value
-                .Where(g => g.Count() == elementCount && g.GroupBy(a => a.Value).Count() == elementCount)
-                .FirstOrDefault()
-                ?.Key;
-        }
-
-        private static readonly XName[] PreferredDictionaryKeys = new[] { (XName)"name", (XName)"key" };
-        */
         private static XElement ReadInputElement(Stream xmlStream, string? inputNode)
         {
             XDocument xml = XDocument.Load(xmlStream);
@@ -228,7 +164,7 @@ namespace Holycode.Configuration.Converter
         {
             var toRemove = new List<Operation>();
             var newOperations = new List<Operation>();
-            foreach (var operation in patch.Operations)
+            foreach (var operation in patch.Operations!)
             {
                 if (operation?.Path == "/" + LoggerNode
                     && operation.Op == OperationTypes.Replace)

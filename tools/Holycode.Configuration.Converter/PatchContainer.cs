@@ -5,9 +5,9 @@ using Newtonsoft.Json;
 
 namespace Holycode.Configuration.Converter;
 
-public class PatchContainer
+internal class PatchContainer
 {
-    public IList<Operation?> Operations { get; set; }
+    public IList<Operation?>? Operations { get; set; }
 
     public JsonPatchDocument ToPatch()
     {

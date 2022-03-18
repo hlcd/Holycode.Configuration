@@ -1,10 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Text;
-using JsonDiffPatchDotNet;
-using Microsoft.AspNetCore.JsonPatch;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace Holycode.Configuration.Converter
 {

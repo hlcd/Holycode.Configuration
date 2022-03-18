@@ -2,7 +2,6 @@
   "profiles": {
     "Holycode.Configuration.Converter": {
       "commandName": "Project",
-      //"commandLineArgs": "--input C:\\_lgm.tests\\Platform\\src\\Settlements\\Legimi.Settlements.Test\\App.config --output appsettings.json --input-node /configuration/log4net --output-node $.Logging.log4net --diff-base base.json --as-patch"
       "commandLineArgs": "--input c:\\_lgm.core\\Platform\\src\\Core\\Legimi.Core.Workflows\\App.Release.config --output appsettings.json --input-node /configuration/log4net --output-node $.Logging.log4net --diff-base C:\\_lgm.core\\Platform\\test\\Legimi.Core.Server.Test\\Legimi.Core.Server.Test\\env.json --as-patch"
     }
   }
