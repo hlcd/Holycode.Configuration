@@ -64,10 +64,6 @@ namespace log4net
 
         public static void AddTerminalAppenderColored() => AddAppender(AppenderFactory.CreateAnsiColorTerminalAppender());
 
-#if !CORECLR
-        public static void AddSmtpAppender(string sendto, string programName = "", Level levelMin = null) 
-            => AddAppender(AppenderFactory.CreateSmtpAppender(sendto, programName, levelMin));
-#endif
         public static void AddFileAppender(string filename, string appenderName = "RollingFileAppender", bool minimalLock = true,
         Action<RollingFileAppender> config = null) 
             => AddAppender(AppenderFactory.CreateFileAppender(filename, appenderName, minimalLock: minimalLock, config: config));

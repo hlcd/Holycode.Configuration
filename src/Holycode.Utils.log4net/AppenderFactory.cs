@@ -36,8 +36,6 @@ namespace log4net
 
         };
 
-#if !CORECLR
-
         internal static AppenderSkeleton CreateConsoleAppenderColored()
         {
             var appender = new ColoredConsoleAppender()
@@ -68,9 +66,7 @@ namespace log4net
             });
             return appender;
         }
-#else
-        internal static AppenderSkeleton CreateConsoleAppenderColored() => CreateConsoleAppender();
-#endif
+
         internal static AnsiColorTerminalAppender CreateAnsiColorTerminalAppender()
         {
             var appender = new AnsiColorTerminalAppender()
@@ -136,40 +132,7 @@ namespace log4net
             l.ActivateOptions();
             return l;
         }
-
-#if !CORECLR
-        internal static SmtpAppenderWithSubjectLayout CreateSmtpAppender(string sendto, string programName, Level levelMin)
-        {
-            const string layout =
-                "%newline[%property{log4net:HostName}]%newline%date [%thread] %-5level %logger [%property{Username}] - %message%newline%newline%newline";
-            string subjectLayout = "[%property{log4net:HostName}] Error @ " + programName;
-
-            var appender = new SmtpAppenderWithSubjectLayout()
-            {
-                Name = "SmtpAppender",
-                SmtpHost = "my.domain.com",
-                Port = 25,
-                Authentication = SmtpAppender.SmtpAuthentication.Basic,
-                Username = "me@my.domain.com",
-                Password = "secret",
-                BufferSize = 512,
-                Lossy = false,
-                Layout = AppenderFactory.CreateLayout(layout),
-                SubjectLayout = new PatternLayout(subjectLayout),
-                Evaluator = new LevelEvaluator(threshold: levelMin ?? Level.Error),
-                To = sendto,
-                From = "me@my.domain.com",
-            };
-
-            appender.AddFilter(new LevelRangeFilter()
-            {
-                AcceptOnMatch = true,
-                LevelMin = levelMin ?? Level.Error
-            });
-            return appender;
-        }
-
-#endif
+        
         internal static CallbackAppender CreateCallbackAppender(Action<string> callback)
         {
             return new CallbackAppender(callback)

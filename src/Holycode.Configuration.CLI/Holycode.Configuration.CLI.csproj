@@ -4,9 +4,13 @@
     <VersionPrefix>3.0.3</VersionPrefix>
     <VersionSuffix>master000-5b427</VersionSuffix>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <AssemblyName>hcfg</AssemblyName>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Holycode.Configuration\Holycode.Configuration.csproj" />
