@@ -12,7 +12,7 @@ v 2.1.2 - add dnxcore50 support</PackageReleaseNotes>
     <RepositoryType>git</RepositoryType>
     <AssemblyVersion>4.0.0.0</AssemblyVersion>
     <FileVersion>4.0.0.0</FileVersion>
-    <Version>4.0.0-dotnet-001</Version>
+    <Version>4.0.0</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	  <PackageTags>configuration tool helper</PackageTags>
 	  <PackegeIconUrl>http://holy.co.de/wp-content/uploads/2016/01/ico-64x64.png</PackegeIconUrl>

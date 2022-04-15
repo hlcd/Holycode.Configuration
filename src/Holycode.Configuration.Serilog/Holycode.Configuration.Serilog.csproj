@@ -3,8 +3,7 @@
     <Description>Helper classes for serilog logger configuration</Description>
     <Copyright>Holycode 2016</Copyright>
     <VersionPrefix>4.0.0</VersionPrefix>
-    <VersionSuffix>dotnet-001</VersionSuffix>
-    <Company>Holycode</Company>
+	  <Company>Holycode</Company>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <DebugType>portable</DebugType>
     <AssemblyName>Holycode.Configuration.Serilog</AssemblyName>

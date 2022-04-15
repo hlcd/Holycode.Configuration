@@ -2,8 +2,7 @@
   <PropertyGroup>
     <Description>no description</Description>
     <VersionPrefix>4.0.0</VersionPrefix>
-    <VersionSuffix>dotnet-001</VersionSuffix>
-    <Company>MyCompany</Company>
+	  <Company>MyCompany</Company>
     <Authors>Holycode</Authors>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <AssemblyName>Holycode.Configuration.log4net</AssemblyName>

@@ -5,7 +5,7 @@
 	  <PackageReleaseNotes>
 		  v 2.0.0 - netstandard support
 	  </PackageReleaseNotes>
-    <VersionPrefix>2.0.0-dotnet-001</VersionPrefix>
+    <VersionPrefix>2.0.0</VersionPrefix>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <DebugType>portable</DebugType>
     <AssemblyName>Holycode.AspNetCore.Middleware</AssemblyName>
