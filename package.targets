@@ -1,0 +1,17 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <Company>Holycode</Company>
+		<PackegeIconUrl>http://holy.co.de/wp-content/uploads/2016/01/ico-64x64.png</PackegeIconUrl>
+	    <RepositoryUrl>https://github.com/hlcd/Holycode.Configuration</RepositoryUrl>
+	    <PackageProjectUrl>https://github.com/hlcd/Holycode.Configuration</PackageProjectUrl>
+	    <RepositoryType>git</RepositoryType>
+		<PackageIcon>icon-64x64.png</PackageIcon>
+		<Copyright>Copyright $([System.DateTime]::Now.Year) Holycode</Copyright>
+    </PropertyGroup>
+	<ItemGroup>
+		<None Include="$(PackageTargetsDir)\icon-64x64.png">
+		  <Pack>True</Pack>
+		  <PackagePath>\</PackagePath>
+		</None>
+  </ItemGroup>
+</Project>
