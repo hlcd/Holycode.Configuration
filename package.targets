@@ -1,15 +1,16 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
     <PropertyGroup>
         <Company>Holycode</Company>
-		<PackegeIconUrl>http://holy.co.de/wp-content/uploads/2016/01/ico-64x64.png</PackegeIconUrl>
+		<PackageIconUrl>https://files.legimi.com/static/hlcd-package-icon.png</PackageIconUrl>
 	    <RepositoryUrl>https://github.com/hlcd/Holycode.Configuration</RepositoryUrl>
 	    <PackageProjectUrl>https://github.com/hlcd/Holycode.Configuration</PackageProjectUrl>
 	    <RepositoryType>git</RepositoryType>
-		<PackageIcon>icon-64x64.png</PackageIcon>
+		<PackageIcon>package-icon.png</PackageIcon>
 		<Copyright>Copyright $([System.DateTime]::Now.Year) Holycode</Copyright>
+		<Authors>Holycode</Authors>
     </PropertyGroup>
 	<ItemGroup>
-		<None Include="$(PackageTargetsDir)\icon-64x64.png">
+		<None Include="$(PackageTargetsDir)\package-icon.png">
 		  <Pack>True</Pack>
 		  <PackagePath>\</PackagePath>
 		</None>

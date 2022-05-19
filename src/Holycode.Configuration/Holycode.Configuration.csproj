@@ -4,21 +4,21 @@
 	</PropertyGroup>
 	<Import Project="../../package.targets" />
 	<PropertyGroup>
-	  <Authors>Holycode</Authors>
-    <Description>Tools for managing configuration</Description>
+		<Description>Tools for managing configuration</Description>
     <AssemblyName>Holycode.Configuration</AssemblyName>
     <PackageId>Holycode.Configuration</PackageId>
-    <PackageReleaseNotes>v 4.0.0 - netstandard support
-v 2.1.2 - add dnxcore50 support</PackageReleaseNotes>
+    <PackageReleaseNotes>
+	    v 4.0.1 - fixed nuget icon
+	    v 4.0.0 - netstandard support
+		v 2.1.2 - add dnxcore50 support
+    </PackageReleaseNotes>
 	  <Company>Holycode</Company>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <DebugType>portable</DebugType>
-    <RepositoryType>git</RepositoryType>
-    <AssemblyVersion>4.0.0.0</AssemblyVersion>
-    <FileVersion>4.0.0.0</FileVersion>
-    <Version>4.0.0</Version>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-	<PackageTags>configuration tool helper</PackageTags>
+		<AssemblyVersion>4.0.1.0</AssemblyVersion>
+    <FileVersion>4.0.1.0</FileVersion>
+    <Version>4.0.1</Version>
+		<PackageTags>configuration tool helper</PackageTags>
 	<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
   <ItemGroup>
