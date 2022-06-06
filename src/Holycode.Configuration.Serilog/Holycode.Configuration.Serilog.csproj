@@ -4,31 +4,31 @@
 	</PropertyGroup>
 	<Import Project="../../package.targets" />
 	<PropertyGroup>
-    <Description>Helper classes for serilog logger configuration</Description>
-    <Copyright>Holycode 2016</Copyright>
-    <VersionPrefix>4.0.1</VersionPrefix>
-		<TargetFrameworks>netstandard2.0</TargetFrameworks>
-    <DebugType>portable</DebugType>
-    <AssemblyName>Holycode.Configuration.Serilog</AssemblyName>
-    <OutputType>Library</OutputType>
-    <PackageId>Holycode.Configuration.Serilog</PackageId>
-    <PackageReleaseNotes>
-		v 4.0.1 - fixed nuget icon
-		v 4.0.0 - dropped direct net 4.6.1 support
-		v 1.0.1 - fixed prefix
-	</PackageReleaseNotes>
+		<Description>Helper classes for serilog logger configuration</Description>
+		<Version>4.0.2</Version>
+		<TargetFrameworks>netstandard2.0;net461;netcoreapp3.1</TargetFrameworks>
+		<DebugType>portable</DebugType>
+		<AssemblyName>Holycode.Configuration.Serilog</AssemblyName>
+		<OutputType>Library</OutputType>
+		<PackageId>Holycode.Configuration.Serilog</PackageId>
+		<PackageReleaseNotes>
+			v 4.0.2 - added multitargeting to solve compatibility issues with older dotnet runtimes
+			v 4.0.1 - fixed nuget icon
+			v 4.0.0 - dropped direct net 4.6.1 support
+			v 1.0.1 - fixed prefix
+		</PackageReleaseNotes>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-  </PropertyGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Holycode.Configuration\Holycode.Configuration.csproj" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Serilog" Version="2.10.0" />
-    <PackageReference Include="Serilog.Sinks.Literate" Version="3.0.0" />
-    <PackageReference Include="Serilog.Sinks.RollingFile" Version="3.3.0" />
-    <PackageReference Include="Serilog.Sinks.CustomRollingFile" Version="2.0.7-*" />
-    <PackageReference Include="Serilog.Sinks.Elasticsearch" Version="8.4.1" />
-    <PackageReference Include="Serilog.Sinks.Trace" Version="3.0.0" />
-    <PackageReference Include="Serilog.Sinks.Graylog" Version="2.3.0" />
-  </ItemGroup>
+	</PropertyGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Holycode.Configuration\Holycode.Configuration.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Serilog" Version="2.10.0" />
+		<PackageReference Include="Serilog.Sinks.Literate" Version="3.0.0" />
+		<PackageReference Include="Serilog.Sinks.RollingFile" Version="3.3.0" />
+		<PackageReference Include="Serilog.Sinks.CustomRollingFile" Version="2.0.7-*" />
+		<PackageReference Include="Serilog.Sinks.Elasticsearch" Version="8.4.1" />
+		<PackageReference Include="Serilog.Sinks.Trace" Version="3.0.0" />
+		<PackageReference Include="Serilog.Sinks.Graylog" Version="2.3.0" />
+	</ItemGroup>
 </Project>
