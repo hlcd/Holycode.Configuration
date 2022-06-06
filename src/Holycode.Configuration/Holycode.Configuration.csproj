@@ -5,27 +5,40 @@
 	<Import Project="../../package.targets" />
 	<PropertyGroup>
 		<Description>Tools for managing configuration</Description>
-    <AssemblyName>Holycode.Configuration</AssemblyName>
-    <PackageId>Holycode.Configuration</PackageId>
-    <PackageReleaseNotes>
-	    v 4.0.1 - fixed nuget icon
-	    v 4.0.0 - netstandard support
-		v 2.1.2 - add dnxcore50 support
-    </PackageReleaseNotes>
-	  <Company>Holycode</Company>
-    <TargetFrameworks>netstandard2.0</TargetFrameworks>
-    <DebugType>portable</DebugType>
-		<AssemblyVersion>4.0.1.0</AssemblyVersion>
-    <FileVersion>4.0.1.0</FileVersion>
-    <Version>4.0.1</Version>
+		<AssemblyName>Holycode.Configuration</AssemblyName>
+		<PackageId>Holycode.Configuration</PackageId>
+		<Version>4.0.2</Version>
+		<PackageReleaseNotes>
+			v 4.0.2 - depend on Microsoft.Extensions.* v 2.0 when targeting net461
+			v 4.0.1 - fixed nuget icon
+			v 4.0.0 - netstandard support
+			v 2.1.2 - add dnxcore50 support
+		</PackageReleaseNotes>
+		<Company>Holycode</Company>
+		<TargetFrameworks>netstandard2.0;net461;netcoreapp3.1</TargetFrameworks>
+		<DebugType>portable</DebugType>
 		<PackageTags>configuration tool helper</PackageTags>
-	<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-  </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="6.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="6.0.1" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.Xml" Version="6.0.0" />
-    <PackageReference Include="System.Configuration.ConfigurationManager" Version="6.0.0" />
-  </ItemGroup>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+	</PropertyGroup>
+	<ItemGroup Condition="'$(TargetFramework)' == 'net461'" >
+		<PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="2.2.0" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.2.0" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="2.2.0" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Xml" Version="2.2.0" />
+		<PackageReference Include="System.Configuration.ConfigurationManager" Version="6.0.0" />
+	</ItemGroup>
+	<ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.1'" >
+		<PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="3.1.3" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.3" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="3.1.3" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Xml" Version="3.1.3" />
+		<PackageReference Include="System.Configuration.ConfigurationManager" Version="6.0.0" />
+	</ItemGroup>
+	<ItemGroup Condition="'$(TargetFramework)' != 'net461' And '$(TargetFramework)' != 'netcoreapp2.0' And '$(TargetFramework)' != 'netcoreapp3.1'" >
+		<PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="6.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="6.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Xml" Version="6.0.0" />
+		<PackageReference Include="System.Configuration.ConfigurationManager" Version="6.0.0" />
+	</ItemGroup>
 </Project>
