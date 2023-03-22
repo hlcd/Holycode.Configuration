@@ -42,7 +42,8 @@ namespace Holycode.Configuration.Converter
             {
                 "prod/prod.pl.config",
                 "prod/prod.de.config",
-                "prod/prod.vmss.pl.config"
+                "prod/prod.vmss.pl.config",
+                "prod/prod-internal-net.pl.config"
             };
 
             string[] devFiles = new[]
