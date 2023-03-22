@@ -17,7 +17,8 @@ namespace Holycode.Configuration
         {
         }
 
-        public IEnumerable<ConfigPathSource> Find(string rootDir, string filePattern, bool stopOnFirstMatch = false) => FindConfigFilesUpwards(rootDir, filePattern, stopOnFirstMatch);
+        public IEnumerable<ConfigPathSource> Find(string rootDir, string filePattern, bool stopOnFirstMatch = false) 
+            => FindConfigFilesUpwards(rootDir, filePattern, stopOnFirstMatch);
 
         private IEnumerable<ConfigPathSource> FindConfigFilesUpwards(string rootDir, string filePattern, bool stopOnFirstMatch = false)
         {
@@ -30,8 +31,14 @@ namespace Holycode.Configuration
                 var found = GetConfigFilesInDir(dir, filePattern);
                 if (found != null && found.Any())
                 {
-                    if (stopOnFirstMatch) names.Add(found.First());
-                    else names.AddRange(found);
+                    if (stopOnFirstMatch)
+                    {
+                        names.Add(found.First());
+                    }
+                    else
+                    {
+                        names.AddRange(found);
+                    }
                     break;
                 }
 
@@ -46,7 +53,8 @@ namespace Holycode.Configuration
             var dirname = Path.GetFileName(directory);
 
             filePattern = filePattern.Replace("\\", "/");
-            foreach(var split in filePattern.Split('|')) {
+            foreach(var split in filePattern.Split('|')) 
+            {
                 var pattern = split; 
                 var patternDir = Path.GetDirectoryName(pattern);
                 if (!string.IsNullOrEmpty(patternDir))
