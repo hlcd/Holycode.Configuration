@@ -418,20 +418,9 @@ namespace Microsoft.Extensions.Configuration
             return cfgBuilder;
         }
 
-        public static IConfigurationBuilder AddIncludeFiles(this IConfigurationBuilder cfgBuilder) => cfgBuilder.AddIncludeFiles(cfgBuilder.GetIncludePaths());
-        public static IConfigurationBuilder AddIncludeFiles(this IConfigurationBuilder cfgBuilder, string key) => cfgBuilder.AddIncludeFiles(cfgBuilder.GetIncludePaths(key));
-        /*
-
-        public static IEnumerable<IConfigurationRoot> GetSources(this IConfigurationRoot root, string key)
-        {
-            var src = root.Sources.Where(s =>
-            {
-                string tmp;
-                return s.TryGet(key, out tmp);
-            });
-
-            return src;
-        }
-        */
+        public static IConfigurationBuilder AddIncludeFiles(this IConfigurationBuilder cfgBuilder) 
+            => cfgBuilder.AddIncludeFiles(cfgBuilder.GetIncludePaths());
+        public static IConfigurationBuilder AddIncludeFiles(this IConfigurationBuilder cfgBuilder, string key) 
+            => cfgBuilder.AddIncludeFiles(cfgBuilder.GetIncludePaths(key));
     }
 }
