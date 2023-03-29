@@ -47,13 +47,14 @@ namespace Holycode.Configuration.Converter
             };
 
             string[] devFiles = new[]
-            {
+            {   
                 "alpha.pl.config",
                 "alpha.pl.tests.config",
                 "beta.pl.config",
                 "beta.pl.tests.config",
                 "alpha.de.config",
                 "dynamic.pl.config",
+                "dynamic-tests.pl.config",
             };
 
             string[] localFiles = new[]
@@ -78,12 +79,24 @@ namespace Holycode.Configuration.Converter
                 commonLocalFile
             };
             string globalCommonFile = "same-all.xml";
-            CompareAppConfigFiles(envCommonSettings, dir, globalCommonFile);
+            CompareAppConfigFiles(envCommonSettings, AppDomain.CurrentDomain.BaseDirectory, globalCommonFile);
 
             CleanupConfig(globalCommonFile, envCommonSettings);
-            CleanupConfig(commonLocalFile + CleanedUpSuffix, localFiles);
-            CleanupConfig(commonDevFile + CleanedUpSuffix, devFiles);
-            CleanupConfig(commonProdFile + CleanedUpSuffix, prodFiles);
+            CleanupConfig(globalCommonFile,
+                localFiles.Select(l => Path.Combine(dir, l)).ToArray(), updateInPlace: true);
+            CleanupConfig(commonLocalFile + CleanedUpSuffix, 
+                localFiles.Select(l => Path.Combine(dir, l)).ToArray(), updateInPlace: true);
+
+            CleanupConfig(globalCommonFile,
+                devFiles.Select(l => Path.Combine(dir, l)).ToArray(), updateInPlace: true);
+            CleanupConfig(commonDevFile + CleanedUpSuffix, 
+                devFiles.Select(l => Path.Combine(dir, l)).ToArray(), updateInPlace: true);
+
+
+            CleanupConfig(globalCommonFile,
+                prodFiles.Select(l => Path.Combine(dir, l)).ToArray(), updateInPlace: true);
+            CleanupConfig(commonProdFile + CleanedUpSuffix, 
+                prodFiles.Select(l => Path.Combine(dir, l)).ToArray(), updateInPlace: true);
 
             return;
 
@@ -115,6 +128,7 @@ namespace Holycode.Configuration.Converter
             using (var stream = File.OpenRead(file))
             {
                 var xml = XDocument.Load(stream);
+
                 return xml.Descendants("add")
                     ?.Select(node => new
                     {
@@ -129,21 +143,19 @@ namespace Holycode.Configuration.Converter
         private const string CleanedUpSuffix = ".updated";
 
         /// <summary>
-        /// Load entries from <paramref name="commonSettingsFile"/>.
+        /// Loads entries from <paramref name="commonSettingsFile"/>.
         /// All loaded entries are removed from each file from <paramref name="files"/> collection
         /// </summary>
-        /// <param name="commonSettingsFile"></param>
-        /// <param name="files"></param>
-        /// <param name="removeFromCommonToo"></param>
+        /// <param name="commonSettingsFile">common settings file</param>
+        /// <param name="files">files to update</param>
+        /// <param name="updateInPlace">
+        /// If <c>true</c>, <paramref name="files"/> are updated in place.
+        /// Otherwise, new file is saved with <c>.updated</c> suffix in its name.
+        /// </param>
         private static void CleanupConfig(string commonSettingsFile, string[] files, 
-            bool removeFromCommonToo = false)
+            bool updateInPlace = false)
         {
             string[] filesToClean = files;
-            if (removeFromCommonToo)
-            {
-                filesToClean = files.Concat(new[] { commonSettingsFile }).ToArray();
-            }
-
             var commonOpts = LoadSettingsFromFile(commonSettingsFile);
             foreach (string file in filesToClean)
             {
@@ -162,7 +174,13 @@ namespace Holycode.Configuration.Converter
                     }
                 }
 
-                using (var stream = File.Open(file + CleanedUpSuffix, FileMode.CreateNew, FileAccess.ReadWrite))
+                string outFile = updateInPlace
+                    ? file
+                    : file + CleanedUpSuffix;
+                FileMode mode = updateInPlace
+                    ? FileMode.Truncate
+                    : FileMode.CreateNew;
+                using (var stream = File.Open(outFile, mode, FileAccess.ReadWrite))
                 {
                     xml.Save(stream);
                 }
@@ -172,6 +190,12 @@ namespace Holycode.Configuration.Converter
         /// <summary>
         /// Stores all settings which are the same in single xml file
         /// </summary>
+        /// <param name="files">files to process</param>
+        /// <param name="configTopDir">directory where <paramref name="files"/> are placed</param>
+        /// <param name="outputFile">
+        /// result file. This file will contain settings which are the same in every
+        /// file in <paramref name="files"/> parameter
+        /// </param>
         private static void CompareAppConfigFiles(string[] files, string configTopDir, string outputFile)
         {
             Dictionary<string, int> allConfigs = new();
@@ -207,7 +231,10 @@ namespace Holycode.Configuration.Converter
                 .OrderBy(kvp => kvp.Key)
                 .Select(kvp => $"<add key=\"{kvp.Key}\" value=\"{kvp.Value.First()}\" />");
 
-            File.WriteAllLines(outputFile, sameKeys);
+            var config = @$"<appSettings>
+{string.Join(Environment.NewLine, sameKeys)}
+</appSettings>";
+            File.WriteAllText(outputFile, config);
         }
 
         private static string? Validate(FileInfo? input, FileInfo? output, 
