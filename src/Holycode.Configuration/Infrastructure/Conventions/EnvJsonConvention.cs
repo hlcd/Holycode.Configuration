@@ -89,13 +89,16 @@ namespace Holycode.Configuration.Conventions
 
                     AddMainFile(path, builder, IsMainConfigOptional);
 
-                    string envBuild = GetBuildName(builder);
+                    string env = GetEnvName(builder);
+                    builder.Set(EnvironmentNameKey, env);
+
+                    var tempBuilder = new ConfigurationBuilder();
+                    AddEnvFiles(dir, mainConfigNameNoExt, env, tempBuilder, IsEnvSpecificConfigOptional);
+
+                    string envBuild = GetBuildName(tempBuilder);
                     builder.Set(BuildKey, envBuild);
 
                     AddBuildEnvFile(dir, mainConfigNameNoExt, envBuild, builder);
-
-                    string env = GetEnvName(builder);
-                    builder.Set(EnvironmentNameKey, env);
 
                     AddEnvFiles(dir, mainConfigNameNoExt, env, builder, IsEnvSpecificConfigOptional);
                     AddOverrideFiles(dir, mainConfigNameNoExt, env, builder);
