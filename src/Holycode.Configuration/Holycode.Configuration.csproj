@@ -7,8 +7,9 @@
 		<Description>Tools for managing configuration</Description>
 		<AssemblyName>Holycode.Configuration</AssemblyName>
 		<PackageId>Holycode.Configuration</PackageId>
-		<Version>4.0.3</Version>
+		<Version>4.1.0-json-002</Version>
 		<PackageReleaseNotes>
+			v 4.1.0 - loading additional config files: per build type (#32358)
 			v 4.0.3 - more depedency fixes, for netstandard2.1 and net6.0
 			v 4.0.2 - depend on Microsoft.Extensions.* v 2.0 when targeting net461
 			v 4.0.1 - fixed nuget icon
