@@ -33,9 +33,13 @@ namespace Microsoft.Extensions.Configuration
         /// <returns></returns>
         public static IConfigurationBuilder AddEnvJson(this IConfigurationBuilder src, string applicationBasePath, bool optional, string environment = null)
         {
-            try {
+            try 
+            {
                 if (src.AppBasePath() == null)
+                {
                     src.SetAppBasePath(applicationBasePath);
+                }
+
                 applicationBasePath = src.AppBasePath();
 
                
@@ -50,7 +54,9 @@ namespace Microsoft.Extensions.Configuration
                 src.AddIncludeFiles();
 
                 return src;
-            } catch(Exception ex) {
+            } 
+            catch(Exception ex) 
+            {
                 throw new Exception(ex.Message + "\r\n" + src.GetConfigTrace(), ex);
             }
         }
@@ -58,8 +64,6 @@ namespace Microsoft.Extensions.Configuration
         /// Set will always override other existing entries
         public static IConfigurationBuilder Set(this IConfigurationBuilder builder, string key, string value)
         {
-            //builder.Properties[key] = value;
-          
             foreach(MemoryConfigurationSource other in builder.Sources.Where(s => s is MemoryConfigurationSource)) {
                 if (other.InitialData == null) continue;
                 var data = other.InitialData.ToList();
@@ -73,13 +77,17 @@ namespace Microsoft.Extensions.Configuration
                 builder.AddInMemoryCollection();
                 mem = builder.Sources.LastOrDefault() as MemoryConfigurationSource;
             }
+
             if (mem != null)
             {
-                var data = mem.InitialData?.ToList() ?? new List<KeyValuePair<string, string>>();
+                var data = mem.InitialData?.ToList() 
+                           ?? new List<KeyValuePair<string, string>>();
                 data.RemoveAll(d => d.Key == key);
                 data.Add(new KeyValuePair<string, string>(key, value));
                 mem.InitialData = data;
-            } else {
+            } 
+            else 
+            {
                 throw new InvalidOperationException("couldn't find MemoryConfigurationSource on builder");
             }
             return builder;
@@ -87,24 +95,12 @@ namespace Microsoft.Extensions.Configuration
 
         public static string Get(this IConfigurationBuilder builder, string key)
         {
-            //return builder.Build().Get(key);
-            // object val;
-            // if (builder.Properties.TryGetValue(key, out val))
-            // {
-            //     return val.ToString();
-            // }
-            //foreach (var src in builder.Sources)
-            //{
-            //    string strVal;
-
-            //    if (src.Build(builder).TryGet(key, out strVal))
-            //    {
-            //        return strVal;
-            //    }
-            //}
-            try {
+            try 
+            {
                 return builder.Build().Get(key);
-             } catch(Exception ex) {
+            } 
+            catch(Exception ex) 
+            {
                 throw new Exception(ex.Message + "\r\n" + builder.GetConfigTrace(), ex);
             }
         }
@@ -278,10 +274,22 @@ namespace Microsoft.Extensions.Configuration
 
         public static string GetServiceUrl(this IConfiguration config, string url, string baseUrl = null)
         {
-            if (baseUrl == null) baseUrl = config.Get("baseUrl");
-            if (baseUrl == null) throw new ArgumentException("no baseUrl given and 'baseUrl' key not found in config");
-            if (url == null) return null;
-            /// is url relative?
+            if (baseUrl == null)
+            {
+                baseUrl = config.Get("baseUrl");
+            }
+
+            if (baseUrl == null)
+            {
+                throw new ArgumentException("no baseUrl given and 'baseUrl' key not found in config");
+            }
+
+            if (url == null)
+            {
+                return null;
+            }
+
+            // is url relative?
             if (url.StartsWith("/"))
             {
                 return (baseUrl.TrimEnd('/') ?? "") + url;

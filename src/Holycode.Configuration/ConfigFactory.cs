@@ -43,7 +43,10 @@ namespace Microsoft.Extensions.Configuration
                 applicationBasePath = Path.GetDirectoryName(applicationBasePath);
 
             var builder = new Microsoft.Extensions.Configuration.ConfigurationBuilder();
-            if (addEnvVariables) builder.AddEnvironmentVariables();
+            if (addEnvVariables)
+            {
+                builder.AddEnvironmentVariables();
+            }
             builder.AddInMemoryCollection();
             
             builder.SetAppBasePath(applicationBasePath);
