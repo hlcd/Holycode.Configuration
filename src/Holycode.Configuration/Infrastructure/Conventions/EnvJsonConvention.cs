@@ -87,7 +87,11 @@ namespace Holycode.Configuration.Conventions
 
                     AddDefaultFiles(dir, mainConfigNameNoExt, builder);
 
-                    AddMainFile(path, builder, IsMainConfigOptional);
+                    string fileName = Path.GetFileName(path);
+                    if (fileName != "env.default.json")
+                    {
+                        AddMainFile(path, builder, IsMainConfigOptional);
+                    }
 
                     string env = GetEnvName(builder);
                     builder.Set(EnvironmentNameKey, env);
