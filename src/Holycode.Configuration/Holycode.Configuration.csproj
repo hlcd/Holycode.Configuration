@@ -11,7 +11,7 @@
 		<PackageReleaseNotes>
 			v 4.2.0 - added net8.0 target
       v 4.1.1 - prevent double load of env.default.json
-					  when env.json was not present
+					      when env.json was not present
 			v 4.1.0 - loading additional config files: per build type (#32358)
 			v 4.0.3 - more depedency fixes, for netstandard2.1 and net6.0
 			v 4.0.2 - depend on Microsoft.Extensions.* v 2.0 when targeting net461
