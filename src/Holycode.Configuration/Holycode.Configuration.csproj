@@ -7,9 +7,10 @@
 		<Description>Tools for managing configuration</Description>
 		<AssemblyName>Holycode.Configuration</AssemblyName>
 		<PackageId>Holycode.Configuration</PackageId>
-		<Version>4.1.1</Version>
+		<Version>4.2.0-net8-001</Version>
 		<PackageReleaseNotes>
-			v 4.1.1 - prevent double load of env.default.json
+			v 4.2.0 - added net8.0 target
+      v 4.1.1 - prevent double load of env.default.json
 					  when env.json was not present
 			v 4.1.0 - loading additional config files: per build type (#32358)
 			v 4.0.3 - more depedency fixes, for netstandard2.1 and net6.0
@@ -19,7 +20,7 @@
 			v 2.1.2 - add dnxcore50 support
 		</PackageReleaseNotes>
 		<Company>Holycode</Company>
-		<TargetFrameworks>netstandard2.0;netstandard2.1;net461;netcoreapp3.1;net6.0</TargetFrameworks>
+		<TargetFrameworks>netstandard2.0;netstandard2.1;net461;netcoreapp3.1;net6.0;net8.0</TargetFrameworks>
 		<DebugType>portable</DebugType>
 		<PackageTags>configuration tool helper</PackageTags>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
@@ -38,11 +39,18 @@
 		<PackageReference Include="Microsoft.Extensions.Configuration.Xml" Version="3.1.3" />
 		<PackageReference Include="System.Configuration.ConfigurationManager" Version="6.0.0" />
 	</ItemGroup>
-	<ItemGroup Condition="'$(TargetFramework)' != 'net461' And '$(TargetFramework)' != 'netcoreapp2.0' And '$(TargetFramework)' != 'netcoreapp3.1'" >
+	<ItemGroup Condition="'$(TargetFramework)' == 'net6.0'" >
 		<PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="6.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="6.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="6.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Configuration.Xml" Version="6.0.0" />
 		<PackageReference Include="System.Configuration.ConfigurationManager" Version="6.0.0" />
 	</ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)' != 'net461' And '$(TargetFramework)' != 'netcoreapp2.0' And '$(TargetFramework)' != 'netcoreapp3.1' And '$(TargetFramework)' != 'net6.0'" >
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Xml" Version="8.0.0" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="8.0.0" />
+  </ItemGroup>
 </Project>
