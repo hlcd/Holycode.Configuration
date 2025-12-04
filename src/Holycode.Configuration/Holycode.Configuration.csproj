@@ -7,7 +7,7 @@
 		<Description>Tools for managing configuration</Description>
 		<AssemblyName>Holycode.Configuration</AssemblyName>
 		<PackageId>Holycode.Configuration</PackageId>
-		<Version>4.2.0-net8-001</Version>
+		<Version>4.2.0-net8-002</Version>
 		<PackageReleaseNotes>
 			v 4.2.0 - added net8.0 target
       v 4.1.1 - prevent double load of env.default.json
@@ -51,6 +51,6 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="8.0.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Xml" Version="8.0.0" />
-    <PackageReference Include="System.Configuration.ConfigurationManager" Version="8.0.0" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="6.0.0" />
   </ItemGroup>
 </Project>
