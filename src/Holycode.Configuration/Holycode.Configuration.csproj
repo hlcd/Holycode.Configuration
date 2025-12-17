@@ -7,7 +7,7 @@
 		<Description>Tools for managing configuration</Description>
 		<AssemblyName>Holycode.Configuration</AssemblyName>
 		<PackageId>Holycode.Configuration</PackageId>
-		<Version>4.2.0-net8-002</Version>
+		<Version>4.2.0</Version>
 		<PackageReleaseNotes>
 			v 4.2.0 - added net8.0 target
       v 4.1.1 - prevent double load of env.default.json
